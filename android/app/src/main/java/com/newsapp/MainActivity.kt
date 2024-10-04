@@ -1,9 +1,11 @@
-package com.newsapp
+package com.aubynsamuel05.newsapp
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
+import com.swmansion.rnscreens.Screen;
+import android.os.Bundle;
 
 class MainActivity : ReactActivity() {
 
