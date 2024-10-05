@@ -4,7 +4,6 @@ import {
   FlatList,
   ActivityIndicator,
   Text,
-  View,
   TouchableOpacity,
 } from 'react-native';
 import {fetchNewsData} from '../services/newsApi';
@@ -22,7 +21,7 @@ const HomeScreen = ({navigation}) => {
   const [error, setError] = useState(null);
   const {darkMode} = useTheme();
   const styles = getStyles(darkMode);
-  const cacheDuration = 20 * 60 * 1000; // 20 minutes in milliseconds
+  const cacheDuration = 20 * 60 * 1000;
   const cacheKey = 'cachedNewsData';
   const cacheTimeKey = 'cachedNewsTime';
 

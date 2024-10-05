@@ -18,7 +18,6 @@ const CategoriesStack = () => {
           component={CategoriesScreen}
           options={{  }}
         />
-        {/* Rename this screen to 'CategoriesArticle' */}
         <Stack.Screen
           name="CategoriesArticle"
           component={CategoriesArticle}

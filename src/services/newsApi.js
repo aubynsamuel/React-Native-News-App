@@ -50,7 +50,7 @@ export const fetchNewsData = async (page) => {
   if (response.status === 429 && retries < MAX_RETRIES) {
     console.log("Switching API Key");
     switchApiKey();
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     retries++;
     return fetchNewsData(page);
   }
@@ -70,7 +70,7 @@ export const fetchCategoriesNews = async (page, category) => {
   if (response.status === 429 && retries < MAX_RETRIES) {
     console.log("Switching API Key");
     switchApiKey();
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
+    await new Promise((resolve) => setTimeout(resolve, 1000)); 
     retries++;
     return fetchCategoriesNews(page, category);
   }
@@ -91,7 +91,7 @@ export const searchNews = async (searchTerm) => {
   if (response.status === 429 && retries < MAX_RETRIES) {
     console.log("Switching API Key");
     switchApiKey();
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
+    await new Promise((resolve) => setTimeout(resolve, 1000)); 
     retries++;
     return searchNews(searchTerm);
   }

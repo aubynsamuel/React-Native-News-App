@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import SettingsScreen from "../screens/SettingsScreen"; // Your SettingsScreen
+import SettingsScreen from "../screens/SettingsScreen"; 
 
 const Stack = createStackNavigator();
 
@@ -11,11 +11,10 @@ const SettingsStackNavigator = () => {
         headerShown:false
       }}
     >
-      {/* Settings Screen */}
       <Stack.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{ title: "Settings" }} // Customize the title
+        options={{ title: "Settings" }} 
       />
     </Stack.Navigator>
   );

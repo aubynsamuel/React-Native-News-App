@@ -49,7 +49,6 @@ const SearchScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Search Bar */}
       <View style={styles.searchBarContainer}>
         <TextInput
           style={styles.searchInput}
@@ -60,9 +59,7 @@ const SearchScreen = ({ navigation }) => {
           onSubmitEditing={handleSearch}
           autoCorrect={false}
         />
-        {/* <TouchableOpacity onPress={handleSearch} style={styles.searchButton}> */}
         <TouchableOpacity onPress={()=>setSearchQuery("")} style={styles.searchButton}>
-          {/* <MaterialIcons name="search" color="black" size={24} /> */}
           {searchQuery && <Icon name="clear" color={darkMode?"#fff":"black"} size={24}/>}
         </TouchableOpacity>
       </View>

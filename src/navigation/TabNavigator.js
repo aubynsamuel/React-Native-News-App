@@ -16,7 +16,6 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        // Customize the icon for each tab
         tabBarIcon: ({ color, size }) => {
           let iconName;
           if (route.name === "HomeStack") {
@@ -50,21 +49,18 @@ const TabNavigator = () => {
         },
       })}
     >
-      {/* Home Tab */}
       <Tab.Screen
         name="HomeStack"
-        component={HomeStackNavigator} // Use the stack navigator for Home
+        component={HomeStackNavigator}
         options={{ title:"Home" }} 
       />
 
-      {/* Categories Tab */}
       <Tab.Screen
         name="CategoriesStack"
         component={CategoriesStackNavigator}
         options={{ title:"Categories" }}
       />
 
-      {/* Settings Tab */}
       <Tab.Screen
         name="SettingsStackNavigator"
         component={SettingsStackNavigator}

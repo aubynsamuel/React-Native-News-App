@@ -116,7 +116,7 @@ const CategoriesScreen = ({navigation}) => {
               key={category}
               style={[
                 styles.categoryButton,
-                selectedCategory === category && styles.activeCategoryButton, // Highlight selected category
+                selectedCategory === category && styles.activeCategoryButton, 
               ]}
               onPress={() => handleCategoryPress(category)}>
               <Text

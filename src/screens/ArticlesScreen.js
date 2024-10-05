@@ -2,7 +2,6 @@ import React from "react";
 import { WebView } from "react-native-webview";
 import { useTheme } from "../ThemeContext";
 import TopHeaderBar from "../components/HeaderBar";
-import { StatusBar } from "react-native";
 
 const ArticleScreen = ({ route }) => {
   const { darkMode } = useTheme();

@@ -1,6 +1,5 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-// import { StatusBar } from "expo-status-bar";
 import {ThemeProvider, useTheme} from './ThemeContext';
 import TabNavigator from './navigation/TabNavigator';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -17,7 +16,7 @@ export default function App() {
 }
 
 function AppContent() {
-  const {darkMode} = useTheme(); // Call useTheme inside the provider
+  const {darkMode} = useTheme();
 
   return (
     <NavigationContainer>

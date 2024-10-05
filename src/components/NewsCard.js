@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import getStyles from "../styles";
 
 const NewsCard = ({ item, onPress, theme }) => {

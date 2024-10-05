@@ -6,15 +6,14 @@ export const getStyles = (isDarkMode) => {
       flex: 1,
       padding: 0.1,
       paddingVertical: 0,
-      backgroundColor: isDarkMode ? "#121212" : "#f9f9f9", // Dark mode background
+      backgroundColor: isDarkMode ? "#121212" : "#f9f9f9", 
       paddingTop: Platform.OS === "android" ? 5 : 0,
     },
     resultsList: {
       paddingHorizontal: 10,
       elevation: 5,
       maxHeight: 650,
-      backgroundColor: isDarkMode ? "#1c1c1c" : "#fff", // Dark mode for cards
-      borderRadius: 8,
+      backgroundColor: isDarkMode ? "#1c1c1c" : "#fff", 
     },
     resultItem: {
       paddingVertical: 10,
@@ -23,7 +22,7 @@ export const getStyles = (isDarkMode) => {
     },
     resultText: {
       fontSize: 14,
-      color: isDarkMode ? "#e0e0e0" : "#000", // Dark mode text color
+      color: isDarkMode ? "#e0e0e0" : "#000", 
     },
     SearchBAR: {
       height: 45,
@@ -34,32 +33,29 @@ export const getStyles = (isDarkMode) => {
       borderWidth: 0,
       borderRadius: 25,
       paddingHorizontal: 10,
-      // marginHorizontal:10,
       flexDirection: "row",
-      // display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
       zIndex: 1,
     },
     searchText: {
       fontSize: 16,
-      color: isDarkMode ? "#bbb" : "purple", // Change search text color
+      color: isDarkMode ? "#bbb" : "purple", 
       flex: 1,
-      // top: 10,
     },
     headerBarIcon:{
-      color: isDarkMode ? "#fff" : "purple", // Search icon color in dark mode
+      color: isDarkMode ? "#fff" : "purple", 
     },
     searchIcon: {
       alignSelf: "center",
-      color: isDarkMode ? "#bbb" : "purple", // Search icon color in dark mode
+      color: isDarkMode ? "#bbb" : "purple", 
     },
     TopHeadlines: {
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 5,
       marginLeft: 10,
-      color: isDarkMode ? "#fff" : "#000", // Dark mode for headlines
+      color: isDarkMode ? "#fff" : "#000",
     },
     categoryContainer: {
       flexDirection: "row",
@@ -69,7 +65,6 @@ export const getStyles = (isDarkMode) => {
     categoryButton: {
       padding: 10,
       marginHorizontal: 5,
-      // marginBottom: 5,
       borderRadius: 20,
       backgroundColor: isDarkMode ? "#333" : "#e0e0e0",
     },
@@ -111,7 +106,7 @@ export const getStyles = (isDarkMode) => {
       flex: 1,
       justifyContent: "center",
       alignSelf: "center",
-      color: isDarkMode ? "#e0e0e0" : "#000", // Text color for dark mode
+      color: isDarkMode ? "#e0e0e0" : "#000",
     },
     cardTitle: {
       fontSize: 16,
@@ -127,15 +122,11 @@ export const getStyles = (isDarkMode) => {
       height: 45,
       width: "82%",
       backgroundColor: isDarkMode ? "#fff8" : "#d1d1d1d1",
-      // alignSelf: "center",
-      // marginBottom: 10,
       borderWidth: 0,
       borderRadius: 25,
       paddingHorizontal: 5,
       marginLeft: 7,
-      // marginHorizontal:10,
       flexDirection: "row",
-      // display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
     },
@@ -195,9 +186,6 @@ export const getStyles = (isDarkMode) => {
       marginHorizontal: 10,
       color: isDarkMode?"#fff":"purple"
     },
-    headerBackButton: {
-      // marginHorizontal:5
-    },
     settingsRow: {
       flexDirection: "row",
       justifyContent: "space-between",
@@ -232,7 +220,6 @@ export const getStyles = (isDarkMode) => {
     image: {
       width: "auto",
       height: 210,
-      // resizeMode:"stretch"
     },
     content: {
       padding: 5,
