@@ -26,24 +26,26 @@ const TabNavigator = () => {
           } else if (route.name === "SettingsStackNavigator") {
             iconName = "settings";
           }
-          return <Icon name={iconName} size={30} color={color} />;
+          return <Icon name={iconName} size={26} color={color} />;
         },
-        tabBarLabelShown: false,
         headerShown:false,
         tabBarActiveTintColor: darkMode ? "#fff" : "purple",
         tabBarInactiveTintColor: darkMode ? "#fff8" : "#666", 
         // tabBarActiveBackgroundColor:"#fec0f4",
-        tabBarShowLabel:false,
+        tabBarShowLabel:true,
+        tabBarLabelPosition:"below-icon",
+        tabBarLabelStyle:{
+          bottom:8
+        },
         tabBarStyle: {
-          backgroundColor: darkMode ? "#555" : "#fff", 
+          backgroundColor: darkMode ? "#121212" : "#fff", 
           // position:"absolute",
           // bottom:10,
           // right:30,
           // left:30,
-          height:55,
-          // borderTopStartRadius:20,
-          // borderTopEndRadius:20,
-          // elevation:5
+          // elevation:5,
+          // borderRadius:50,
+          height:55,          
 
         },
       })}
