@@ -4,6 +4,7 @@ import {ThemeProvider, useTheme} from './ThemeContext';
 import TabNavigator from './navigation/TabNavigator';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
+import { colors } from './styles';
 
 export default function App() {
   return (
@@ -23,7 +24,7 @@ function AppContent() {
       <TabNavigator />
       <StatusBar
       animated={true}
-        backgroundColor={darkMode ? "#121212" : "#f9f9f9"}
+        backgroundColor={darkMode ? colors.bgDarkColor : colors.bgLightColor}
         barStyle={darkMode?"light-content":"dark-content"}
       />
     </NavigationContainer>

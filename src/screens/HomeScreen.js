@@ -91,7 +91,6 @@ const HomeScreen = ({navigation}) => {
         <Text style={styles.searchText}>Search News</Text>
         <Icon
           name="search"
-          // color="purple"
           style={styles.searchIcon}
           size={25}
         />

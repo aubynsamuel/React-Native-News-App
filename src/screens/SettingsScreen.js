@@ -8,14 +8,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useTheme } from "../ThemeContext";
-import getStyles from "../styles";
+import {getStyles, colors} from "../styles";
 import TopHeaderBar from "../components/HeaderBar";
 
 // Custom component for settings with a switch
 const SettingSwitch = ({ label, value, onValueChange, styles }) => (
   <View style={styles.settingsRow}>
     <Text style={styles.settingsText}>{label}</Text>
-    <Switch value={value} onValueChange={onValueChange}   thumbColor={'purple'} trackColor={{ false:'lightgrey', true: 'grey' }}
+    <Switch value={value} onValueChange={onValueChange}   thumbColor={colors.accent} trackColor={{ false:'lightgrey', true: 'grey' }}
 
     />
   </View>
@@ -26,7 +26,7 @@ const SettingButton = ({ label, buttonText, onPress, styles }) => (
   <View style={styles.settingsOption}>
     <Text style={styles.settingsText}>{label}</Text>
     <TouchableOpacity style={styles.settingsButton} onPress={onPress} activeOpacity={0.6}>
-      <Text style={{color:"#fff"}}>{buttonText}</Text>
+      <Text style={{color:colors.bgLightColor}}>{buttonText}</Text>
     </TouchableOpacity>
   </View>
 );
@@ -42,7 +42,7 @@ const SettingsScreen = () => {
   const toggleDataSaverMode = () => setDataSaverMode((prev) => !prev);
 
   return (
-    <SafeAreaView style={{backgroundColor:darkMode?"#121212" : "#f9f9f9", flex:1}}>
+    <SafeAreaView style={{backgroundColor:darkMode?colors.bgDarkColor : colors.bgLightColor, flex:1}}>
       <TopHeaderBar title={"Settings"} backButtonShown={false} theme={darkMode} />
       <ScrollView>
         <SettingSwitch
@@ -57,24 +57,17 @@ const SettingsScreen = () => {
           onValueChange={toggleNotifications}
           styles={styles}
         />
-        <SettingSwitch
+        {/* <SettingSwitch
           label="Data Saver Mode"
           value={dataSaverMode}
           onValueChange={toggleDataSaverMode}
           styles={styles}
-        />
+        /> */}
 
-        {/* New Settings Options Below */}
         <SettingButton
-          label="Set Default News Category"
+          label="Set Default Category"
           buttonText="Select Category"
-          onPress={() => console.log("Navigate to category selection screen")}
-          styles={styles}
-        />
-        <SettingButton
-          label="Article Font Size"
-          buttonText="Adjust Font Size"
-          onPress={() => console.log("Navigate to font size adjustment")}
+          onPress={() => {}}
           styles={styles}
         />
         <SettingButton
@@ -84,13 +77,7 @@ const SettingsScreen = () => {
           styles={styles}
         />
         <SettingButton
-          label="Set Article Language"
-          buttonText="Select Language"
-          onPress={() => console.log("Navigate to language selection")}
-          styles={styles}
-        />
-        <SettingButton
-          label="Clear Cache"
+          label="Cache"
           buttonText="Clear Now"
           onPress={() => console.log("Clear app cache")}
           styles={styles}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, ActivityIndicator } from "react-native";
-import getStyles from "../styles";
+import {getStyles, colors} from "../styles";
 
 const NewsCard = ({ item, onPress, theme }) => {
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const NewsCard = ({ item, onPress, theme }) => {
           <ActivityIndicator
             style={styles.loadingIndicator}
             size="large"
-            color="purple"
+            color={colors.accent}
           />
         )}
         <Image

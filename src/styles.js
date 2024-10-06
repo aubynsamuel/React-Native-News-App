@@ -1,19 +1,25 @@
 import { StyleSheet, Platform } from "react-native";
 
+export const colors={
+  bgDarkColor:"#000",
+  bgLightColor:"#fff",
+  accent:"purple"
+}
+
 export const getStyles = (isDarkMode) => {
   return StyleSheet.create({
     container: {
       flex: 1,
       padding: 0.1,
       paddingVertical: 0,
-      backgroundColor: isDarkMode ? "#121212" : "#f9f9f9", 
+      backgroundColor: isDarkMode ? colors.bgDarkColor : colors.bgLightColor, 
       paddingTop: Platform.OS === "android" ? 5 : 0,
     },
     resultsList: {
       paddingHorizontal: 10,
       elevation: 5,
       maxHeight: 650,
-      backgroundColor: isDarkMode ? "#1c1c1c" : "#fff", 
+      backgroundColor: isDarkMode ? "#1c1c1c" : colors.bgLightColor, 
     },
     resultItem: {
       paddingVertical: 10,
@@ -22,7 +28,7 @@ export const getStyles = (isDarkMode) => {
     },
     resultText: {
       fontSize: 14,
-      color: isDarkMode ? "#e0e0e0" : "#000", 
+      color: isDarkMode ? "#e0e0e0" : colors.bgDarkColor, 
     },
     SearchBAR: {
       height: 45,
@@ -40,27 +46,27 @@ export const getStyles = (isDarkMode) => {
     },
     searchText: {
       fontSize: 16,
-      color: isDarkMode ? "#bbb" : "purple", 
+      color: isDarkMode ? "#bbb" : colors.accent, 
       flex: 1,
     },
     headerBarIcon:{
-      color: isDarkMode ? "#fff" : "purple", 
+      color: isDarkMode ? colors.bgLightColor : colors.accent, 
     },
     searchIcon: {
       alignSelf: "center",
-      color: isDarkMode ? "#bbb" : "purple", 
+      color: isDarkMode ? "#bbb" : colors.accent, 
     },
     TopHeadlines: {
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 5,
       marginLeft: 10,
-      color: isDarkMode ? "#fff" : "#000",
+      color: isDarkMode ? colors.bgLightColor : colors.bgDarkColor,
     },
     categoryContainer: {
       flexDirection: "row",
       paddingVertical: 10,
-      backgroundColor: isDarkMode ? "#121212" : "#f9f9f9",
+      backgroundColor: isDarkMode ? colors.bgDarkColor : colors.bgLightColor,
     },
     categoryButton: {
       padding: 10,
@@ -69,14 +75,14 @@ export const getStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? "#333" : "#e0e0e0",
     },
     activeCategoryButton: {
-      backgroundColor: "purple",
+      backgroundColor: colors.accent,
     },
     categoryText: {
-      color: isDarkMode ? "#bbb" : "#000",
+      color: isDarkMode ? "#bbb" : colors.bgDarkColor,
       fontWeight: "bold",
     },
     activeCategoryText: {
-      color: "#fff",
+      color: colors.bgLightColor,
     },
     errorText: {
       color: "red",
@@ -84,7 +90,7 @@ export const getStyles = (isDarkMode) => {
       marginTop: 20,
     },
     card: {
-      backgroundColor: isDarkMode ? "#1c1c1c" : "#fff",
+      backgroundColor: isDarkMode ? "#1c1c1c" : colors.bgLightColor,
       borderRadius: 20,
       marginBottom: 15,
       overflow: "hidden",
@@ -106,12 +112,12 @@ export const getStyles = (isDarkMode) => {
       flex: 1,
       justifyContent: "center",
       alignSelf: "center",
-      color: isDarkMode ? "#e0e0e0" : "#000",
+      color: isDarkMode ? "#e0e0e0" : colors.bgDarkColor,
     },
     cardTitle: {
       fontSize: 16,
       fontWeight: "bold",
-      color: isDarkMode ? "#fff" : "#000",
+      color: isDarkMode ? colors.bgLightColor : colors.bgDarkColor,
     },
     cardDescription: {
       fontSize: 14,
@@ -134,7 +140,7 @@ export const getStyles = (isDarkMode) => {
       flex: 1,
       padding: 10,
       borderRadius: 5,
-      color:isDarkMode?"black":"purple"
+      color:isDarkMode?"black":colors.accent
     },
     searchButton: {
       marginLeft: 10,
@@ -154,7 +160,7 @@ export const getStyles = (isDarkMode) => {
     },
     titleText: {
       fontSize: 16,
-      color: isDarkMode ? "#ffffff" : "#000000",
+      color: isDarkMode ? colors.bgLightColor : colors.bgDarkColor,
     },
     errorText: {
       color: "#ff5252",
@@ -167,13 +173,13 @@ export const getStyles = (isDarkMode) => {
     noResultsText: {
       textAlign: "center",
       marginTop: 20,
-      color: isDarkMode ? "#ffffff" : "#000000",
+      color: isDarkMode ? colors.bgLightColor : colors.bgDarkColor,
     },
     headerContainer: {
       flexDirection: "row", 
       alignItems: "center", 
       padding: 10,
-      backgroundColor: isDarkMode?"#121212" : "#f9f9f9",
+      backgroundColor: isDarkMode?colors.bgDarkColor : colors.bgLightColor,
       elevation: 3, 
       height: 45,
       borderBottomWidth:1.5,
@@ -184,7 +190,7 @@ export const getStyles = (isDarkMode) => {
       fontSize: 20,
       fontWeight: "500",
       marginHorizontal: 10,
-      color: isDarkMode?"#fff":"purple"
+      color: isDarkMode?colors.bgLightColor:colors.accent
     },
     settingsRow: {
       flexDirection: "row",
@@ -193,17 +199,17 @@ export const getStyles = (isDarkMode) => {
       padding: 10,
       borderBottomWidth: 1,
       borderBottomColor: isDarkMode ? "#444" : "#ccc",
-      backgroundColor: isDarkMode ? "#333" : "#fff",
+      backgroundColor: isDarkMode ? "#333" : colors.bgLightColor,
     },
     settingsOption: {
       padding: 10,
       borderBottomWidth: 1,
       borderBottomColor: isDarkMode ? "#444" : "#ccc",
-      backgroundColor: isDarkMode ? "#333" : "#fff",
+      backgroundColor: isDarkMode ? "#333" : colors.bgLightColor,
     },
     settingsText: {
       fontSize: 16,
-      color: isDarkMode ? "#fff" : "#000",
+      color: isDarkMode ? colors.bgLightColor : colors.bgDarkColor,
     },
     settingsButton: {
       marginTop: 8,
@@ -227,7 +233,7 @@ export const getStyles = (isDarkMode) => {
     title: {
       fontSize: 18,
       fontWeight: "bold",
-      color:isDarkMode? "#fff": "#333",
+      color:isDarkMode? colors.bgLightColor: "#333",
     },
     description: {
       fontSize: 14,

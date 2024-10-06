@@ -5,7 +5,7 @@ import HomeStackNavigator from "./HomeStackNavigator";
 import CategoriesStackNavigator from "./CategoriesStack";
 import SettingsStackNavigator from "./SettingsStack";
 import { useTheme } from "../ThemeContext";
-import getStyles from "../styles"; 
+import {getStyles, colors} from "../styles"; 
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +28,7 @@ const TabNavigator = () => {
           return <Icon name={iconName} size={26} color={color} />;
         },
         headerShown:false,
-        tabBarActiveTintColor: darkMode ? "#fff" : "purple",
+        tabBarActiveTintColor: darkMode ? colors.bgLightColor : colors.accent,
         tabBarInactiveTintColor: darkMode ? "#fff8" : "#666", 
         // tabBarActiveBackgroundColor:"#fec0f4",
         tabBarShowLabel:true,
@@ -37,7 +37,7 @@ const TabNavigator = () => {
           bottom:8
         },
         tabBarStyle: {
-          backgroundColor: darkMode ? "#121212" : "#fff", 
+          backgroundColor: darkMode ? colors.bgDarkColor : colors.bgLightColor, 
           // position:"absolute",
           // bottom:10,
           // right:30,
