@@ -8,10 +8,12 @@ import {
 } from 'react-native';
 import {fetchNewsData} from '../services/newsApi';
 import NewsCard from '../components/NewsCard';
-import Icon from 'react-native-vector-icons/MaterialIcons'; 
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useTheme} from '../ThemeContext';
 import getStyles from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {lists} from '../../list';
+import PopUpMenu from '../components/PopUpMenu';
 
 const HomeScreen = ({navigation}) => {
   const [dataList, setDataList] = useState([]);
@@ -19,7 +21,7 @@ const HomeScreen = ({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
-  const {darkMode} = useTheme();
+  const {darkMode, addToBookmarks, removeFromBookmarks} = useTheme();
   const styles = getStyles(darkMode);
   const cacheDuration = 20 * 60 * 1000;
   const cacheKey = 'cachedNewsData';
@@ -38,7 +40,12 @@ const HomeScreen = ({navigation}) => {
       const cachedTime = await AsyncStorage.getItem(cacheTimeKey);
       const now = new Date().getTime();
 
-      if (cachedData && cachedTime && now - cachedTime < cacheDuration && page === 1) {
+      if (
+        cachedData &&
+        cachedTime &&
+        now - cachedTime < cacheDuration &&
+        page === 1
+      ) {
         // If cache is valid, use cached data
         console.log('Using cached data');
         const articles = JSON.parse(cachedData);
@@ -89,23 +96,20 @@ const HomeScreen = ({navigation}) => {
         onPress={handleSearchPress}
         activeOpacity={0.5}>
         <Text style={styles.searchText}>Search News</Text>
-        <Icon
-          name="search"
-          style={styles.searchIcon}
-          size={25}
-        />
+        <Icon name="search" style={styles.searchIcon} size={25} />
       </TouchableOpacity>
       <Text style={styles.TopHeadlines}>Top Headlines</Text>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={dataList}
+        // data={lists}
         keyExtractor={item => item.url || item.title}
         renderItem={({item}) => (
           <NewsCard
             item={item}
-            onPress={() => navigation.navigate('Article', {url: item.url})}
-            theme={darkMode}
-          />
+            onPress={() => navigation.navigate('Article', {url: item.url})}>
+            <PopUpMenu item={item} />
+          </NewsCard>
         )}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.3}

@@ -3,15 +3,19 @@ import {NavigationContainer} from '@react-navigation/native';
 import {ThemeProvider, useTheme} from './ThemeContext';
 import TabNavigator from './navigation/TabNavigator';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import { StatusBar } from 'react-native';
-import { colors } from './styles';
+import {StatusBar} from 'react-native';
+import {colors} from './styles';
+import { MenuProvider } from 'react-native-popup-menu';
+
 
 export default function App() {
   return (
     <ThemeProvider>
-      <SafeAreaProvider>
-        <AppContent />
-      </SafeAreaProvider>
+      <MenuProvider>
+        <SafeAreaProvider>
+          <AppContent />
+        </SafeAreaProvider>
+      </MenuProvider>
     </ThemeProvider>
   );
 }
@@ -23,11 +27,10 @@ function AppContent() {
     <NavigationContainer>
       <TabNavigator />
       <StatusBar
-      animated={true}
+        animated={true}
         backgroundColor={darkMode ? colors.bgDarkColor : colors.bgLightColor}
-        barStyle={darkMode?"light-content":"dark-content"}
+        barStyle={darkMode ? 'light-content' : 'dark-content'}
       />
     </NavigationContainer>
   );
 }
-

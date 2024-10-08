@@ -14,6 +14,7 @@ import {fetchCategoriesNews} from '../services/newsApi';
 import {useTheme} from '../ThemeContext';
 import getStyles from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PopUpMenu from '../components/PopUpMenu';
 
 const CATEGORIES = [
   'business',
@@ -113,10 +114,11 @@ const CategoriesScreen = ({navigation}) => {
           showsHorizontalScrollIndicator={false}>
           {CATEGORIES.map(category => (
             <TouchableOpacity
+              activeOpacity={0.6}
               key={category}
               style={[
                 styles.categoryButton,
-                selectedCategory === category && styles.activeCategoryButton, 
+                selectedCategory === category && styles.activeCategoryButton,
               ]}
               onPress={() => handleCategoryPress(category)}>
               <Text
@@ -141,9 +143,9 @@ const CategoriesScreen = ({navigation}) => {
               item={item}
               onPress={() =>
                 navigation.navigate('CategoriesArticle', {url: item.url})
-              }
-              theme={darkMode}
-            />
+              }>
+              <PopUpMenu item={item}></PopUpMenu>
+            </NewsCard>
           )}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.3}

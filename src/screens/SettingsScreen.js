@@ -11,35 +11,15 @@ import { useTheme } from "../ThemeContext";
 import {getStyles, colors} from "../styles";
 import TopHeaderBar from "../components/HeaderBar";
 
-// Custom component for settings with a switch
-const SettingSwitch = ({ label, value, onValueChange, styles }) => (
-  <View style={styles.settingsRow}>
-    <Text style={styles.settingsText}>{label}</Text>
-    <Switch value={value} onValueChange={onValueChange}   thumbColor={colors.accent} trackColor={{ false:'lightgrey', true: 'grey' }}
 
-    />
-  </View>
-);
 
-// Custom component for settings with a button
-const SettingButton = ({ label, buttonText, onPress, styles }) => (
-  <View style={styles.settingsOption}>
-    <Text style={styles.settingsText}>{label}</Text>
-    <TouchableOpacity style={styles.settingsButton} onPress={onPress} activeOpacity={0.6}>
-      <Text style={{color:colors.bgLightColor}}>{buttonText}</Text>
-    </TouchableOpacity>
-  </View>
-);
-
-const SettingsScreen = () => {
+const SettingsScreen = ({navigation}) => {
   const { darkMode, toggleDarkMode } = useTheme();
   const styles = getStyles(darkMode);
 
   const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
-  const [dataSaverMode, setDataSaverMode] = React.useState(false);
 
   const toggleNotifications = () => setNotificationsEnabled((prev) => !prev);
-  const toggleDataSaverMode = () => setDataSaverMode((prev) => !prev);
 
   return (
     <SafeAreaView style={{backgroundColor:darkMode?colors.bgDarkColor : colors.bgLightColor, flex:1}}>
@@ -57,12 +37,6 @@ const SettingsScreen = () => {
           onValueChange={toggleNotifications}
           styles={styles}
         />
-        {/* <SettingSwitch
-          label="Data Saver Mode"
-          value={dataSaverMode}
-          onValueChange={toggleDataSaverMode}
-          styles={styles}
-        /> */}
 
         <SettingButton
           label="Set Default Category"
@@ -73,7 +47,7 @@ const SettingsScreen = () => {
         <SettingButton
           label="Manage Bookmarks"
           buttonText="View Bookmarks"
-          onPress={() => console.log("Navigate to bookmark management")}
+          onPress={() => navigation.navigate("Bookmarks")}
           styles={styles}
         />
         <SettingButton
@@ -94,3 +68,24 @@ const SettingsScreen = () => {
 };
 
 export default SettingsScreen;
+
+
+// Custom component for settings with a switch
+const SettingSwitch = ({ label, value, onValueChange, styles }) => (
+  <View style={styles.settingsRow}>
+    <Text style={styles.settingsText}>{label}</Text>
+    <Switch value={value} onValueChange={onValueChange}   thumbColor={colors.accent} trackColor={{ false:'lightgrey', true: 'grey' }}
+
+    />
+  </View>
+);
+
+// Custom component for settings with a button
+const SettingButton = ({ label, buttonText, onPress, styles }) => (
+  <View style={styles.settingsOption}>
+    <Text style={styles.settingsText}>{label}</Text>
+    <TouchableOpacity style={styles.settingsButton} onPress={onPress} activeOpacity={0.6}>
+      <Text style={{color:colors.bgLightColor}}>{buttonText}</Text>
+    </TouchableOpacity>
+  </View>
+);

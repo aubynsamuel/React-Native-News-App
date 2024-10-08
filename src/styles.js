@@ -183,7 +183,7 @@ export const getStyles = (isDarkMode) => {
       elevation: 3, 
       height: 45,
       borderBottomWidth:1.5,
-      borderBottomColor :"#0003",
+      borderBottomColor :isDarkMode?"grey":"#0003",
       paddingTop: Platform.OS === "android" ? 5 : 0,
     },
     headerTitle: {
@@ -199,13 +199,13 @@ export const getStyles = (isDarkMode) => {
       padding: 10,
       borderBottomWidth: 1,
       borderBottomColor: isDarkMode ? "#444" : "#ccc",
-      backgroundColor: isDarkMode ? "#333" : colors.bgLightColor,
+      backgroundColor: isDarkMode ? colors.bgDarkColor : colors.bgLightColor,
     },
     settingsOption: {
       padding: 10,
       borderBottomWidth: 1,
       borderBottomColor: isDarkMode ? "#444" : "#ccc",
-      backgroundColor: isDarkMode ? "#333" : colors.bgLightColor,
+      backgroundColor: isDarkMode ? colors.bgDarkColor : colors.bgLightColor,
     },
     settingsText: {
       fontSize: 16,
@@ -231,15 +231,16 @@ export const getStyles = (isDarkMode) => {
       padding: 5,
     },
     title: {
-      fontSize: 18,
+      fontSize: 15,
       fontWeight: "bold",
       color:isDarkMode? colors.bgLightColor: "#333",
     },
     description: {
-      fontSize: 14,
+      fontSize: 13,
       color: isDarkMode?"#fff9":"#666",
       marginVertical:5,
       marginBottom: 10,
+      width: '90%'
     },
     loadingIndicator: {
       position: 'absolute',
@@ -247,6 +248,9 @@ export const getStyles = (isDarkMode) => {
       left: '50%',
       transform: [{ translateX: -12.5 }, { translateY: -12.5 }],
     },
+    moreVert:{
+      zIndex:3,
+    }
   });
 };
 

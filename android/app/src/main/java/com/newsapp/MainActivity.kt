@@ -7,6 +7,7 @@ import com.facebook.react.defaults.DefaultReactActivityDelegate
 import com.swmansion.rnscreens.Screen;
 import android.os.Bundle;
 
+
 class MainActivity : ReactActivity() {
 
   /**
@@ -21,4 +22,6 @@ class MainActivity : ReactActivity() {
    */
   override fun createReactActivityDelegate(): ReactActivityDelegate =
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+
+    
 }

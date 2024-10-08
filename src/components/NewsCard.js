@@ -1,10 +1,18 @@
-import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, ActivityIndicator } from "react-native";
-import {getStyles, colors} from "../styles";
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import {getStyles, colors} from '../styles';
+import {useTheme} from '../ThemeContext';
 
-const NewsCard = ({ item, onPress, theme }) => {
+const NewsCard = ({children, item, onPress}) => {
   const [loading, setLoading] = useState(true);
-  const styles = getStyles(theme);
+  const {darkMode} = useTheme();
+  const styles = getStyles(darkMode);
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.card} activeOpacity={0.8}>
@@ -18,6 +26,7 @@ const NewsCard = ({ item, onPress, theme }) => {
         )}
         <Image
           source={{ uri: item.urlToImage }}
+          // source={require('./looking_for_a_friend_4k_hd_inspirational.jpg')}
           style={styles.image}
           onLoad={() => setLoading(false)}
           onError={() => setLoading(false)}
@@ -25,11 +34,18 @@ const NewsCard = ({ item, onPress, theme }) => {
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.title} numberOfLines={2}>
-          {item.title}
-        </Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{width: '90%'}}>
+            <Text style={styles.title} numberOfLines={2}>
+              {item.title}
+            </Text>
+          </View>
 
-        <Text style={styles.description} numberOfLines={2}>
+        {/* Pop pu Menus Component */}
+         {children}
+        </View>
+
+        <Text style={styles.description} numberOfLines={1}>
           {item.description}
         </Text>
       </View>
