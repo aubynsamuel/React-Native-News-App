@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import NewsCard from '../components/NewsCard';
 import {fetchCategoriesNews} from '../services/newsApi';
-import {useTheme} from '../ThemeContext';
+import {useTheme} from '../NewsAppContext';
 import getStyles from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PopUpMenu from '../components/PopUpMenu';
@@ -32,7 +32,7 @@ const CategoriesScreen = ({navigation}) => {
   const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('business');
-  const {darkMode} = useTheme();
+  const {darkMode, toggleStorage} = useTheme();
   const styles = getStyles(darkMode);
   const cacheDuration = 20 * 60 * 1000; // 20 minutes in milliseconds
 
@@ -71,6 +71,7 @@ const CategoriesScreen = ({navigation}) => {
           // Store the new data and cache time
           await AsyncStorage.setItem(cacheKey, JSON.stringify(articles));
           await AsyncStorage.setItem(cacheTimeKey, now.toString());
+          toggleStorage()
         } else {
           setDataList([...dataList, ...articles]);
         }
@@ -144,7 +145,7 @@ const CategoriesScreen = ({navigation}) => {
               onPress={() =>
                 navigation.navigate('CategoriesArticle', {url: item.url})
               }>
-              <PopUpMenu item={item}></PopUpMenu>
+            <PopUpMenu item={item} add={true} remove={true} />
             </NewsCard>
           )}
           onEndReached={handleLoadMore}

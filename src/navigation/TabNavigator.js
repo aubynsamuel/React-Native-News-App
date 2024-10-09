@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import HomeStackNavigator from "./HomeStackNavigator";
 import CategoriesStackNavigator from "./CategoriesStack";
 import SettingsStackNavigator from "./SettingsStack";
-import { useTheme } from "../ThemeContext";
+import { useTheme } from "../NewsAppContext";
 import {getStyles, colors} from "../styles"; 
 
 const Tab = createBottomTabNavigator();

@@ -1,6 +1,6 @@
 import React from "react";
 import { WebView } from "react-native-webview";
-import { useTheme } from "../ThemeContext";
+import { useTheme } from "../NewsAppContext";
 import TopHeaderBar from "../components/HeaderBar";
 
 const BookmarkArticle = ({ route }) => {

@@ -9,7 +9,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {searchNews} from '../services/newsApi';
-import {useTheme} from '../ThemeContext';
+import {useTheme} from '../NewsAppContext';
 import {getStyles, colors} from '../styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -50,7 +50,7 @@ const SearchScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.searchBarContainer}>
+      <View style={styles.SearchScreenSearchBar}>
         <TextInput
           style={styles.searchInput}
           placeholder="Search for news..."

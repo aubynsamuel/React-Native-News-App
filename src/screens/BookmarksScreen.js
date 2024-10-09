@@ -1,34 +1,39 @@
-import {View, Text, FlatList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import {React, useState} from 'react';
 import TopHeaderBar from '../components/HeaderBar';
-import { useTheme } from '../ThemeContext';
-import NewsCard from '../components/BookmarksNewsCard';
+import { useTheme } from '../NewsAppContext';
+import BookmarksNewsCard from '../components/BookmarksNewsCard';
 import PopUpMenu from '../components/PopUpMenu';
+import { colors } from '../styles';
 
 const Bookmarks = ({navigation}) => {
     const [refreshing, setRefreshing] = useState(false);
     const onRefresh = () => {
         setRefreshing(true);
+        setTimeout(()=>setRefreshing(false), 300)
+        
       };
-    const {bookmarksList} = useTheme()
+    const {darkMode, bookmarksList} = useTheme()
   return (
-    <View>
-      <TopHeaderBar title={'Bookmarks'} backButtonShown={true}/>
+    <View style={{backgroundColor: darkMode ? colors.bgDarkColor : colors.bgLightColor, flex: 1,}} >
+      <TopHeaderBar title={'Bookmarks'} backButtonShown={true} theme={darkMode}/>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={bookmarksList}
         keyExtractor={item => item.url || item.title}
         renderItem={({item}) => (
-          <NewsCard
+          <BookmarksNewsCard
             item={item}
             onPress={() => navigation.navigate('BookmarksArticles', {url: item.url})}
           >
-            <PopUpMenu item={item}/>
-          </NewsCard>
+            <PopUpMenu item={item} remove={true}/>
+          </BookmarksNewsCard>
         )}
+        style={{marginVertical:5}}
         refreshing={refreshing}
         onRefresh={onRefresh}
-        // ListFooterComponent={loading && <ActivityIndicator />}
+        
+        ListFooterComponent={<View style={{height:40}} />}
       />
     </View>
   );

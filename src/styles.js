@@ -15,22 +15,9 @@ export const getStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? colors.bgDarkColor : colors.bgLightColor, 
       paddingTop: Platform.OS === "android" ? 5 : 0,
     },
-    resultsList: {
-      paddingHorizontal: 10,
-      elevation: 5,
-      maxHeight: 650,
-      backgroundColor: isDarkMode ? "#1c1c1c" : colors.bgLightColor, 
-    },
-    resultItem: {
-      paddingVertical: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: isDarkMode ? "#444" : "#ccc",
-    },
-    resultText: {
-      fontSize: 14,
-      color: isDarkMode ? "#e0e0e0" : colors.bgDarkColor, 
-    },
-    SearchBAR: {
+
+    // Search bar (HomeScreen.js)
+    HomeSearchBar: {
       height: 45,
       width: "95%",
       backgroundColor: isDarkMode ? "#555" : "#d1d1d1d1",
@@ -49,13 +36,12 @@ export const getStyles = (isDarkMode) => {
       color: isDarkMode ? "#bbb" : colors.accent, 
       flex: 1,
     },
-    headerBarIcon:{
-      color: isDarkMode ? colors.bgLightColor : colors.accent, 
-    },
     searchIcon: {
       alignSelf: "center",
       color: isDarkMode ? "#bbb" : colors.accent, 
     },
+
+    // HomeScreen.js
     TopHeadlines: {
       fontSize: 20,
       fontWeight: "bold",
@@ -63,6 +49,8 @@ export const getStyles = (isDarkMode) => {
       marginLeft: 10,
       color: isDarkMode ? colors.bgLightColor : colors.bgDarkColor,
     },
+
+    // CategoriesScreen
     categoryContainer: {
       flexDirection: "row",
       paddingVertical: 10,
@@ -84,47 +72,9 @@ export const getStyles = (isDarkMode) => {
     activeCategoryText: {
       color: colors.bgLightColor,
     },
-    errorText: {
-      color: "red",
-      textAlign: "center",
-      marginTop: 20,
-    },
-    card: {
-      backgroundColor: isDarkMode ? "#1c1c1c" : colors.bgLightColor,
-      borderRadius: 20,
-      marginBottom: 15,
-      overflow: "hidden",
-      flexDirection: "row",
-      height: 150,
-      backgroundColor: isDarkMode ? "#333" : "#d1d1d1d1",
-    },
-    cardImage: {
-      width: "50%",
-      height: "80%",
-      alignSelf: "center",
-      marginLeft: 8,
-      borderColor: "transparent",
-      borderWidth: 5,
-      borderRadius: 15,
-    },
-    cardText: {
-      padding: 7,
-      flex: 1,
-      justifyContent: "center",
-      alignSelf: "center",
-      color: isDarkMode ? "#e0e0e0" : colors.bgDarkColor,
-    },
-    cardTitle: {
-      fontSize: 16,
-      fontWeight: "bold",
-      color: isDarkMode ? colors.bgLightColor : colors.bgDarkColor,
-    },
-    cardDescription: {
-      fontSize: 14,
-      color: isDarkMode ? "#bbb" : "#666",
-      marginVertical: 5,
-    },
-    searchBarContainer: {
+
+    // Search bar and search results (SearchScreen.js)
+    SearchScreenSearchBar: {
       height: 45,
       width: "82%",
       backgroundColor: isDarkMode ? "#fff8" : "#d1d1d1d1",
@@ -152,6 +102,7 @@ export const getStyles = (isDarkMode) => {
       top: 20,
       right: 12,
     },
+    // Search results (SearchScreen)
     titleContainer: {
       paddingVertical: 8,
       borderBottomWidth: 1,
@@ -175,6 +126,8 @@ export const getStyles = (isDarkMode) => {
       marginTop: 20,
       color: isDarkMode ? colors.bgLightColor : colors.bgDarkColor,
     },
+
+    // Custom Header Bar (HeaderBar.js)
     headerContainer: {
       flexDirection: "row", 
       alignItems: "center", 
@@ -192,19 +145,23 @@ export const getStyles = (isDarkMode) => {
       marginHorizontal: 10,
       color: isDarkMode?colors.bgLightColor:colors.accent
     },
+    headerBarIcon:{
+      color: isDarkMode ? colors.bgLightColor : colors.accent, 
+      marginHorizontal:10
+    },
     settingsRow: {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
       padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: isDarkMode ? "#444" : "#ccc",
+      // borderBottomWidth: 1,
+      // borderBottomColor: isDarkMode ? "#444" : "#ccc",
       backgroundColor: isDarkMode ? colors.bgDarkColor : colors.bgLightColor,
     },
     settingsOption: {
       padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: isDarkMode ? "#444" : "#ccc",
+      // borderBottomWidth: 1,
+      // borderBottomColor: isDarkMode ? "#444" : "#ccc",
       backgroundColor: isDarkMode ? colors.bgDarkColor : colors.bgLightColor,
     },
     settingsText: {
@@ -218,10 +175,12 @@ export const getStyles = (isDarkMode) => {
       borderRadius: 5,
       alignItems: "center",
     },
+
+    // Custom News Car Component
     card: {
       backgroundColor: "transparent",
       overflow: "hidden",
-      marginBottom: 15,
+      marginBottom: 10,
     },
     image: {
       width: "auto",
@@ -248,6 +207,7 @@ export const getStyles = (isDarkMode) => {
       left: '50%',
       transform: [{ translateX: -12.5 }, { translateY: -12.5 }],
     },
+    // Pop up menu icon
     moreVert:{
       zIndex:3,
     }

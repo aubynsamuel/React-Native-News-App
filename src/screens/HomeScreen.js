@@ -9,10 +9,9 @@ import {
 import {fetchNewsData} from '../services/newsApi';
 import NewsCard from '../components/NewsCard';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useTheme} from '../ThemeContext';
+import {useTheme} from '../NewsAppContext';
 import getStyles from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {lists} from '../../list';
 import PopUpMenu from '../components/PopUpMenu';
 
 const HomeScreen = ({navigation}) => {
@@ -21,7 +20,7 @@ const HomeScreen = ({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
-  const {darkMode, addToBookmarks, removeFromBookmarks} = useTheme();
+  const {darkMode, toggleStorage} = useTheme();
   const styles = getStyles(darkMode);
   const cacheDuration = 20 * 60 * 1000;
   const cacheKey = 'cachedNewsData';
@@ -59,6 +58,7 @@ const HomeScreen = ({navigation}) => {
           // Store new data and cache time
           await AsyncStorage.setItem(cacheKey, JSON.stringify(articles));
           await AsyncStorage.setItem(cacheTimeKey, now.toString());
+          toggleStorage()
         } else {
           setDataList([...dataList, ...articles]);
         }
@@ -92,7 +92,7 @@ const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
-        style={styles.SearchBAR}
+        style={styles.HomeSearchBar}
         onPress={handleSearchPress}
         activeOpacity={0.5}>
         <Text style={styles.searchText}>Search News</Text>
@@ -108,7 +108,7 @@ const HomeScreen = ({navigation}) => {
           <NewsCard
             item={item}
             onPress={() => navigation.navigate('Article', {url: item.url})}>
-            <PopUpMenu item={item} />
+            <PopUpMenu item={item} add={true} remove={true} />
           </NewsCard>
         )}
         onEndReached={handleLoadMore}

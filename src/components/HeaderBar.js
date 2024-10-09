@@ -11,14 +11,12 @@ const TopHeaderBar = ({ title, backButtonShown, theme }) => {
     <View style={styles.headerContainer}>
       {backButtonShown && (
         <TouchableOpacity
-          style={styles.headerBackButton}
           onPress={() => navigation.goBack()}
         >
           <Icon name="arrow-back" style={styles.headerBarIcon} size={25} />
         </TouchableOpacity>
       )}
-      <Text style={styles.headerTitle} onPress={() => navigation.goBack()}>{title}</Text>
-    
+      <Text style={styles.headerTitle} >{title}</Text>
     </View>
   );
 };

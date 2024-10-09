@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -6,24 +6,59 @@ import {
   Text,
   Switch,
   TouchableOpacity,
-} from "react-native";
-import { useTheme } from "../ThemeContext";
-import {getStyles, colors} from "../styles";
-import TopHeaderBar from "../components/HeaderBar";
-
-
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useTheme} from '../NewsAppContext';
+import {getStyles, colors} from '../styles';
+import TopHeaderBar from '../components/HeaderBar';
 
 const SettingsScreen = ({navigation}) => {
-  const { darkMode, toggleDarkMode } = useTheme();
+  const {darkMode, toggleDarkMode, bookmarksList, storage} = useTheme();
   const styles = getStyles(darkMode);
+  const [storageSize, setStorageSize] = useState(0);
+  
+  
+  const calculateStorageSize = async () => {
+    try {
+      const allKeys = await AsyncStorage.getAllKeys();
+      const keysToInclude = allKeys.filter(key => key !== 'bookmarksList');
+      console.log(keysToInclude)
+      const result = await AsyncStorage.multiGet(keysToInclude);
+      let totalSize = 0;
+      result.forEach(([key, value]) => {
+        totalSize += key.length + value.length;
+      });
+      setStorageSize(totalSize);
+    } catch (error) {
+      console.error('Failed to calculate storage size', error);
+    }
+  };
 
-  const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
+  useEffect(() => {
+    calculateStorageSize();
+  }, [storage]);
 
-  const toggleNotifications = () => setNotificationsEnabled((prev) => !prev);
+  const clearCache = async () => {
+    try {
+      await AsyncStorage.clear();
+      setStorageSize(0);
+      console.log('App cache cleared');
+    } catch (error) {
+      console.error('Failed to clear app cache', error);
+    }
+  };
 
   return (
-    <SafeAreaView style={{backgroundColor:darkMode?colors.bgDarkColor : colors.bgLightColor, flex:1}}>
-      <TopHeaderBar title={"Settings"} backButtonShown={false} theme={darkMode} />
+    <SafeAreaView
+      style={{
+        backgroundColor: darkMode ? colors.bgDarkColor : colors.bgLightColor,
+        flex: 1,
+      }}>
+      <TopHeaderBar
+        title={'Settings'}
+        backButtonShown={false}
+        theme={darkMode}
+      />
       <ScrollView>
         <SettingSwitch
           label="Dark Mode"
@@ -31,35 +66,17 @@ const SettingsScreen = ({navigation}) => {
           onValueChange={toggleDarkMode}
           styles={styles}
         />
-        <SettingSwitch
-          label="Enable Notifications"
-          value={notificationsEnabled}
-          onValueChange={toggleNotifications}
-          styles={styles}
-        />
 
         <SettingButton
-          label="Set Default Category"
-          buttonText="Select Category"
-          onPress={() => {}}
-          styles={styles}
-        />
-        <SettingButton
-          label="Manage Bookmarks"
+          label={`Bookmarks (${bookmarksList.length})`}
           buttonText="View Bookmarks"
-          onPress={() => navigation.navigate("Bookmarks")}
+          onPress={() => navigation.navigate('Bookmarks')}
           styles={styles}
         />
         <SettingButton
-          label="Cache"
+          label={`Cache (${(storageSize / 1024).toFixed(2)} KB)`}
           buttonText="Clear Now"
-          onPress={() => console.log("Clear app cache")}
-          styles={styles}
-        />
-        <SettingButton
-          label="About This App"
-          buttonText="Learn More"
-          onPress={() => console.log("Navigate to about screen")}
+          onPress={clearCache}
           styles={styles}
         />
       </ScrollView>
@@ -69,23 +86,28 @@ const SettingsScreen = ({navigation}) => {
 
 export default SettingsScreen;
 
-
 // Custom component for settings with a switch
-const SettingSwitch = ({ label, value, onValueChange, styles }) => (
+const SettingSwitch = ({label, value, onValueChange, styles}) => (
   <View style={styles.settingsRow}>
     <Text style={styles.settingsText}>{label}</Text>
-    <Switch value={value} onValueChange={onValueChange}   thumbColor={colors.accent} trackColor={{ false:'lightgrey', true: 'grey' }}
-
+    <Switch
+      value={value}
+      onValueChange={onValueChange}
+      thumbColor={colors.accent}
+      trackColor={{false: 'lightgrey', true: 'grey'}}
     />
   </View>
 );
 
 // Custom component for settings with a button
-const SettingButton = ({ label, buttonText, onPress, styles }) => (
+const SettingButton = ({label, buttonText, onPress, styles}) => (
   <View style={styles.settingsOption}>
     <Text style={styles.settingsText}>{label}</Text>
-    <TouchableOpacity style={styles.settingsButton} onPress={onPress} activeOpacity={0.6}>
-      <Text style={{color:colors.bgLightColor}}>{buttonText}</Text>
+    <TouchableOpacity
+      style={styles.settingsButton}
+      onPress={onPress}
+      activeOpacity={0.6}>
+      <Text style={{color: colors.bgLightColor}}>{buttonText}</Text>
     </TouchableOpacity>
   </View>
 );

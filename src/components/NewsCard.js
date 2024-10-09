@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {getStyles, colors} from '../styles';
-import {useTheme} from '../ThemeContext';
+import {useTheme} from '../NewsAppContext';
 
 const NewsCard = ({children, item, onPress}) => {
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ const NewsCard = ({children, item, onPress}) => {
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.card} activeOpacity={0.8}>
-      <View style={styles.imageContainer}>
+      <View>
         {loading && (
           <ActivityIndicator
             style={styles.loadingIndicator}
