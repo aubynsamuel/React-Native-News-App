@@ -15,6 +15,7 @@ import {useTheme} from '../NewsAppContext';
 import getStyles from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PopUpMenu from '../components/PopUpMenu';
+import SkeletonLoader from '../components/SkeletonLoader';
 
 const CATEGORIES = [
   'business',
@@ -71,11 +72,12 @@ const CategoriesScreen = ({navigation}) => {
           // Store the new data and cache time
           await AsyncStorage.setItem(cacheKey, JSON.stringify(articles));
           await AsyncStorage.setItem(cacheTimeKey, now.toString());
-          toggleStorage()
+          toggleStorage();
         } else {
           setDataList([...dataList, ...articles]);
         }
       }
+      setError(false);
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -135,27 +137,36 @@ const CategoriesScreen = ({navigation}) => {
       </SafeAreaView>
 
       <View style={[styles.container, {paddingVertical: 0, paddingTop: 0}]}>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={dataList}
-          keyExtractor={item => item.url || item.title}
-          renderItem={({item}) => (
-            <NewsCard
-              item={item}
-              onPress={() =>
-                navigation.navigate('CategoriesArticle', {url: item.url})
-              }>
-            <PopUpMenu item={item} add={true} remove={true} />
-            </NewsCard>
-          )}
-          onEndReached={handleLoadMore}
-          onEndReachedThreshold={0.3}
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          ListFooterComponent={loading && <ActivityIndicator />}
-        />
+        {loading && page === 1 ? (
+          // Show skeleton loader while loading
+          <>
+            <SkeletonLoader darkMode={darkMode} />
+            <SkeletonLoader darkMode={darkMode} />
+            <SkeletonLoader darkMode={darkMode} />
+          </>
+        ) : (
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={dataList}
+            keyExtractor={item => item.url || item.title}
+            renderItem={({item}) => (
+              <NewsCard
+                item={item}
+                onPress={() =>
+                  navigation.navigate('CategoriesArticle', {url: item.url})
+                }>
+                <PopUpMenu item={item} add={true} remove={true} />
+              </NewsCard>
+            )}
+            onEndReached={handleLoadMore}
+            onEndReachedThreshold={0.3}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            ListFooterComponent={loading && <ActivityIndicator />}
+          />
+        )}
 
-        {/* {error && <Text style={styles.errorText}>{error}</Text>} */}
+        {error && <Text style={styles.errorText}>{error}</Text>}
       </View>
     </>
   );

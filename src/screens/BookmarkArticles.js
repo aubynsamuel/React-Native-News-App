@@ -2,6 +2,8 @@ import React from "react";
 import { WebView } from "react-native-webview";
 import { useTheme } from "../NewsAppContext";
 import TopHeaderBar from "../components/HeaderBar";
+import { Text } from "react-native";
+
 
 const BookmarkArticle = ({ route }) => {
   const { darkMode } = useTheme();

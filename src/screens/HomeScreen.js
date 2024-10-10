@@ -13,6 +13,7 @@ import {useTheme} from '../NewsAppContext';
 import getStyles from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PopUpMenu from '../components/PopUpMenu';
+import SkeletonLoader from '../components/SkeletonLoader';
 
 const HomeScreen = ({navigation}) => {
   const [dataList, setDataList] = useState([]);
@@ -32,9 +33,7 @@ const HomeScreen = ({navigation}) => {
 
   const fetchNews = async () => {
     setLoading(true);
-
     try {
-      // Check for cached data
       const cachedData = await AsyncStorage.getItem(cacheKey);
       const cachedTime = await AsyncStorage.getItem(cacheTimeKey);
       const now = new Date().getTime();
@@ -45,8 +44,6 @@ const HomeScreen = ({navigation}) => {
         now - cachedTime < cacheDuration &&
         page === 1
       ) {
-        // If cache is valid, use cached data
-        console.log('Using cached data');
         const articles = JSON.parse(cachedData);
         setDataList(articles);
       } else {
@@ -54,15 +51,14 @@ const HomeScreen = ({navigation}) => {
         const articles = await fetchNewsData(page);
         if (page === 1) {
           setDataList(articles);
-
-          // Store new data and cache time
           await AsyncStorage.setItem(cacheKey, JSON.stringify(articles));
           await AsyncStorage.setItem(cacheTimeKey, now.toString());
-          toggleStorage()
+          toggleStorage();
         } else {
           setDataList([...dataList, ...articles]);
         }
       }
+      setError(false);
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -80,7 +76,6 @@ const HomeScreen = ({navigation}) => {
 
   const handleLoadMore = () => {
     if (!loading && dataList.length >= page * 15) {
-      // Ensure more data exists
       setPage(page + 1);
     }
   };
@@ -99,25 +94,35 @@ const HomeScreen = ({navigation}) => {
         <Icon name="search" style={styles.searchIcon} size={25} />
       </TouchableOpacity>
       <Text style={styles.TopHeadlines}>Top Headlines</Text>
-      <FlatList
+
+
+      {loading && page === 1 ? (
+        // Show skeleton loader while loading
+        <>
+          <SkeletonLoader darkMode={darkMode} />
+          <SkeletonLoader darkMode={darkMode} />
+          <SkeletonLoader darkMode={darkMode} />
+        </>
+      ) : (
+        <FlatList
         showsVerticalScrollIndicator={false}
         data={dataList}
-        // data={lists}
         keyExtractor={item => item.url || item.title}
         renderItem={({item}) => (
           <NewsCard
-            item={item}
-            onPress={() => navigation.navigate('Article', {url: item.url})}>
-            <PopUpMenu item={item} add={true} remove={true} />
-          </NewsCard>
-        )}
-        onEndReached={handleLoadMore}
-        onEndReachedThreshold={0.3}
-        refreshing={refreshing}
-        onRefresh={onRefresh}
-        ListFooterComponent={loading && <ActivityIndicator />}
-      />
-      {/* {error && <Text style={styles.errorText}>{error}</Text>} */}
+          item={item}
+          onPress={() => navigation.navigate('Article', {url: item.url})}>
+              <PopUpMenu item={item} add={true} remove={true} />
+            </NewsCard>
+          )}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.3}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          ListFooterComponent={loading && <ActivityIndicator />}
+        />
+      )}
+      {error && <Text style={styles.errorText}>{error}</Text>}
     </SafeAreaView>
   );
 };
