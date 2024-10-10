@@ -22,7 +22,7 @@ const SettingsScreen = ({navigation}) => {
     try {
       const allKeys = await AsyncStorage.getAllKeys();
       const keysToInclude = allKeys.filter(key => key !== 'bookmarksList');
-      console.log(keysToInclude)
+      // console.log(keysToInclude)
       const result = await AsyncStorage.multiGet(keysToInclude);
       let totalSize = 0;
       result.forEach(([key, value]) => {

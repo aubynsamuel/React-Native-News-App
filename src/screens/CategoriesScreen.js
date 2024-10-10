@@ -10,7 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import NewsCard from '../components/NewsCard';
-import {fetchCategoriesNews} from '../services/newsApi';
+import {fetchCategoriesNews, searchNews} from '../services/newsApi';
 import {useTheme} from '../NewsAppContext';
 import getStyles from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,6 +18,7 @@ import PopUpMenu from '../components/PopUpMenu';
 import SkeletonLoader from '../components/SkeletonLoader';
 
 const CATEGORIES = [
+  'local',
   'business',
   'technology',
   'sports',
@@ -60,12 +61,16 @@ const CategoriesScreen = ({navigation}) => {
         page === 1
       ) {
         // If cache is valid and it's the first page, use cached data
-        console.log('Using cached data for category:', selectedCategory);
         const articles = JSON.parse(cachedData);
         setDataList(articles);
+        console.log('Using cached data for category:', selectedCategory);
       } else {
         // Fetch new data
-        const articles = await fetchCategoriesNews(page, selectedCategory);
+        const localNewsTerms = 'ghanaian'
+        const articles =
+          selectedCategory === 'local'
+            ? await searchNews(localNewsTerms, page)
+            : await fetchCategoriesNews(page, selectedCategory);
         if (page === 1) {
           setDataList(articles);
 
@@ -73,6 +78,13 @@ const CategoriesScreen = ({navigation}) => {
           await AsyncStorage.setItem(cacheKey, JSON.stringify(articles));
           await AsyncStorage.setItem(cacheTimeKey, now.toString());
           toggleStorage();
+
+          setTimeout(async () => {
+            await AsyncStorage.removeItem(cacheKey);
+            await AsyncStorage.removeItem(cacheTimeKey);
+            console.log(`${cacheKey} cleared!`);
+            toggleStorage();
+          }, cacheDuration);
         } else {
           setDataList([...dataList, ...articles]);
         }
@@ -103,6 +115,7 @@ const CategoriesScreen = ({navigation}) => {
     setSelectedCategory(category);
     setPage(1);
     setDataList([]);
+    console.log(dataList.length);
   };
 
   return (

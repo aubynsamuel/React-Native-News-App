@@ -65,6 +65,7 @@ export const fetchNewsData = async (page) => {
 
 export const fetchCategoriesNews = async (page, category) => {
   const url = `https://newsapi.org/v2/top-headlines?category=${category}&language=en&pageSize=25&page=${page}&apiKey=${API_KEY}&sortBy=publishedAt`;
+  console.log(url);
   const response = await fetch(url);
 
   if (response.status === 429 && retries < MAX_RETRIES) {
@@ -83,9 +84,10 @@ export const fetchCategoriesNews = async (page, category) => {
   return removeDuplicates(filteredData);
 };
 
-export const searchNews = async (searchTerm) => {
+export const searchNews = async (searchTerm, page) => {
   const encodedSearchTerm = encodeURIComponent(searchTerm);
-  const url = `https://newsapi.org/v2/everything?q=${encodedSearchTerm}&language=en&apiKey=${API_KEY}&pageSize=20&page=1&sortBy=publishedAt`;
+  const url = `https://newsapi.org/v2/everything?q=${encodedSearchTerm}&language=en&apiKey=${API_KEY}&pageSize=20&page=${page}&sortBy=publishedAt`;
+  console.log(url)
   const response = await fetch(url);
 
   if (response.status === 429 && retries < MAX_RETRIES) {

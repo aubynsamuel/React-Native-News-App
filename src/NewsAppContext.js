@@ -56,7 +56,7 @@ export const AppContextProvider = ({children}) => {
 
   const addToBookmarks = item => {
     if (!bookmarksList.includes(item)) {
-      setBookmarksList(prevList => [...prevList, item]);
+    setBookmarksList(prevList => [...prevList, item]);
     }
     console.log(
       `AppContext Screen Article added, number of articles: ${bookmarksList.length}`,

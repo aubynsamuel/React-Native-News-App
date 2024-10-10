@@ -18,7 +18,7 @@ export const getStyles = (isDarkMode) => {
 
     // Search bar (HomeScreen.js)
     HomeSearchBar: {
-      height: 45,
+      height: 38,
       width: "95%",
       backgroundColor: isDarkMode ? "#555" : "#d1d1d1d1",
       alignSelf: "center",
@@ -75,7 +75,7 @@ export const getStyles = (isDarkMode) => {
 
     // Search bar and search results (SearchScreen.js)
     SearchScreenSearchBar: {
-      height: 45,
+      height: 38,
       width: "82%",
       backgroundColor: isDarkMode ? "#fff8" : "#d1d1d1d1",
       borderWidth: 0,
@@ -99,7 +99,7 @@ export const getStyles = (isDarkMode) => {
     cancelSearch: {
       alignSelf: "flex-end",
       position: "absolute",
-      top: 20,
+      top: 16,
       right: 12,
     },
     // Search results (SearchScreen)

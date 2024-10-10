@@ -27,7 +27,7 @@ const SearchScreen = ({navigation}) => {
     setLoading(true);
     setError(null);
     try {
-      const results = await searchNews(searchQuery);
+      const results = await searchNews(searchQuery, 1);
       setSearchResults(results);
     } catch (error) {
       setError('Something went wrong, please try again.');

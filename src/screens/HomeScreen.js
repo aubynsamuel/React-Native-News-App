@@ -24,8 +24,8 @@ const HomeScreen = ({navigation}) => {
   const {darkMode, toggleStorage} = useTheme();
   const styles = getStyles(darkMode);
   const cacheDuration = 20 * 60 * 1000;
-  const cacheKey = 'cachedNewsData';
-  const cacheTimeKey = 'cachedNewsTime';
+  const cacheKey = `cachedNewsData`;
+  const cacheTimeKey = `cachedNewsTime`;
 
   useEffect(() => {
     fetchNews();
@@ -46,6 +46,7 @@ const HomeScreen = ({navigation}) => {
       ) {
         const articles = JSON.parse(cachedData);
         setDataList(articles);
+        console.log("Using Cached Data")
       } else {
         // Fetch new data
         const articles = await fetchNewsData(page);
@@ -54,6 +55,13 @@ const HomeScreen = ({navigation}) => {
           await AsyncStorage.setItem(cacheKey, JSON.stringify(articles));
           await AsyncStorage.setItem(cacheTimeKey, now.toString());
           toggleStorage();
+
+          setTimeout(async () => {
+            await AsyncStorage.removeItem(cacheKey);
+            await AsyncStorage.removeItem(cacheTimeKey);
+            console.log(`${cacheKey} cleared!`);
+            toggleStorage();
+          }, cacheDuration);
         } else {
           setDataList([...dataList, ...articles]);
         }
@@ -95,7 +103,6 @@ const HomeScreen = ({navigation}) => {
       </TouchableOpacity>
       <Text style={styles.TopHeadlines}>Top Headlines</Text>
 
-
       {loading && page === 1 ? (
         // Show skeleton loader while loading
         <>
@@ -105,13 +112,13 @@ const HomeScreen = ({navigation}) => {
         </>
       ) : (
         <FlatList
-        showsVerticalScrollIndicator={false}
-        data={dataList}
-        keyExtractor={item => item.url || item.title}
-        renderItem={({item}) => (
-          <NewsCard
-          item={item}
-          onPress={() => navigation.navigate('Article', {url: item.url})}>
+          showsVerticalScrollIndicator={false}
+          data={dataList}
+          keyExtractor={item => item.url || item.title}
+          renderItem={({item}) => (
+            <NewsCard
+              item={item}
+              onPress={() => navigation.navigate('Article', {url: item.url})}>
               <PopUpMenu item={item} add={true} remove={true} />
             </NewsCard>
           )}

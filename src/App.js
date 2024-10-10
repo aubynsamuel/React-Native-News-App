@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {DarkTheme, DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {AppContextProvider, useTheme} from './NewsAppContext';
 import TabNavigator from './navigation/TabNavigator';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -24,7 +24,7 @@ function AppContent() {
   const {darkMode} = useTheme();
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={darkMode ? DarkTheme : DefaultTheme}>
       <TabNavigator />
       <StatusBar
         animated={true}
