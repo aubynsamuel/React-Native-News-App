@@ -44,11 +44,9 @@ function removeDuplicates(articles) {
 
 export const fetchNewsData = async (page) => {
   const url = `https://newsapi.org/v2/top-headlines?category=general&language=en&pageSize=25&page=${page}&apiKey=${API_KEY}&sortBy=publishedAt`;
-  console.log(url);
   const response = await fetch(url);
 
   if (response.status === 429 && retries < MAX_RETRIES) {
-    console.log("Switching API Key");
     switchApiKey();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     retries++;
@@ -65,11 +63,9 @@ export const fetchNewsData = async (page) => {
 
 export const fetchCategoriesNews = async (page, category) => {
   const url = `https://newsapi.org/v2/top-headlines?category=${category}&language=en&pageSize=25&page=${page}&apiKey=${API_KEY}&sortBy=publishedAt`;
-  console.log(url);
   const response = await fetch(url);
 
   if (response.status === 429 && retries < MAX_RETRIES) {
-    console.log("Switching API Key");
     switchApiKey();
     await new Promise((resolve) => setTimeout(resolve, 1000)); 
     retries++;
@@ -87,11 +83,9 @@ export const fetchCategoriesNews = async (page, category) => {
 export const searchNews = async (searchTerm, page) => {
   const encodedSearchTerm = encodeURIComponent(searchTerm);
   const url = `https://newsapi.org/v2/everything?q=${encodedSearchTerm}&language=en&apiKey=${API_KEY}&pageSize=20&page=${page}&sortBy=publishedAt`;
-  console.log(url)
   const response = await fetch(url);
 
   if (response.status === 429 && retries < MAX_RETRIES) {
-    console.log("Switching API Key");
     switchApiKey();
     await new Promise((resolve) => setTimeout(resolve, 1000)); 
     retries++;

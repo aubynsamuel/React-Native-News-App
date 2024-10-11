@@ -63,7 +63,6 @@ const CategoriesScreen = ({navigation}) => {
         // If cache is valid and it's the first page, use cached data
         const articles = JSON.parse(cachedData);
         setDataList(articles);
-        console.log('Using cached data for category:', selectedCategory);
       } else {
         // Fetch new data
         const localNewsTerms = 'ghanaian'
@@ -82,7 +81,6 @@ const CategoriesScreen = ({navigation}) => {
           setTimeout(async () => {
             await AsyncStorage.removeItem(cacheKey);
             await AsyncStorage.removeItem(cacheTimeKey);
-            console.log(`${cacheKey} cleared!`);
             toggleStorage();
           }, cacheDuration);
         } else {
@@ -91,7 +89,6 @@ const CategoriesScreen = ({navigation}) => {
       }
       setError(false);
     } catch (error) {
-      console.log(error);
       setError(error.message);
     } finally {
       setLoading(false);
@@ -115,7 +112,6 @@ const CategoriesScreen = ({navigation}) => {
     setSelectedCategory(category);
     setPage(1);
     setDataList([]);
-    console.log(dataList.length);
   };
 
   return (

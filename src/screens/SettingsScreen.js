@@ -22,7 +22,6 @@ const SettingsScreen = ({navigation}) => {
     try {
       const allKeys = await AsyncStorage.getAllKeys();
       const keysToInclude = allKeys.filter(key => key !== 'bookmarksList');
-      // console.log(keysToInclude)
       const result = await AsyncStorage.multiGet(keysToInclude);
       let totalSize = 0;
       result.forEach(([key, value]) => {
@@ -30,7 +29,6 @@ const SettingsScreen = ({navigation}) => {
       });
       setStorageSize(totalSize);
     } catch (error) {
-      console.error('Failed to calculate storage size', error);
     }
   };
 
@@ -42,9 +40,7 @@ const SettingsScreen = ({navigation}) => {
     try {
       await AsyncStorage.clear();
       setStorageSize(0);
-      console.log('App cache cleared');
     } catch (error) {
-      console.error('Failed to clear app cache', error);
     }
   };
 

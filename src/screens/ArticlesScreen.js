@@ -17,8 +17,8 @@ const ArticleScreen = ({ route }) => {
 
       <WebView
         source={{ uri: url }}
-        cacheEnabled={true}
-        cacheMode="LOAD_CACHE_ELSE_NETWORK"
+        cacheEnabled={false}
+        // cacheMode="LOAD_CACHE_ELSE_NETWORK"
         startInLoadingState={true}
         renderError={() => <Text> Failed to load the article</Text>}
       />

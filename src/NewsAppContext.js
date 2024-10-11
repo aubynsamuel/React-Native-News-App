@@ -31,7 +31,6 @@ export const AppContextProvider = ({children}) => {
           setBookmarksList(JSON.parse(storedBookmarks));
         }
       } catch (error) {
-        console.error('Failed to load bookmarks from storage', error);
       }
     };
 
@@ -47,7 +46,6 @@ export const AppContextProvider = ({children}) => {
           JSON.stringify(bookmarksList),
         );
       } catch (error) {
-        console.error('Failed to save bookmarks to storage', error);
       }
     };
 
@@ -58,9 +56,6 @@ export const AppContextProvider = ({children}) => {
     if (!bookmarksList.includes(item)) {
     setBookmarksList(prevList => [...prevList, item]);
     }
-    console.log(
-      `AppContext Screen Article added, number of articles: ${bookmarksList.length}`,
-    );
   };
 
   const removeFromBookmarks = item => {
@@ -69,9 +64,6 @@ export const AppContextProvider = ({children}) => {
         prevList.filter(bookmark => bookmark !== item),
       );
     }
-    console.log(
-      `AppContext Screen Article removed, number of articles: ${bookmarksList.length}`,
-    );
   };
 
   return (

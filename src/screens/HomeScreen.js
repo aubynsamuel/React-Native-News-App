@@ -46,7 +46,6 @@ const HomeScreen = ({navigation}) => {
       ) {
         const articles = JSON.parse(cachedData);
         setDataList(articles);
-        console.log("Using Cached Data")
       } else {
         // Fetch new data
         const articles = await fetchNewsData(page);
@@ -59,7 +58,6 @@ const HomeScreen = ({navigation}) => {
           setTimeout(async () => {
             await AsyncStorage.removeItem(cacheKey);
             await AsyncStorage.removeItem(cacheTimeKey);
-            console.log(`${cacheKey} cleared!`);
             toggleStorage();
           }, cacheDuration);
         } else {
