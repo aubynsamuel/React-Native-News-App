@@ -1,8 +1,4 @@
-const API_KEYS = [
-  "e83e808f55ce4c62a8afe1c33d13d28b",
-  "8126ae9100ff429ebec68fbf3fc4cd4d",
-  "3065a421504844f18f7091cafe9c42c7",
-];
+import { API_KEYS } from "../../apiKeys";
 
 const MAX_RETRIES = 3;
 let retries = 0;
@@ -12,7 +8,7 @@ function switchApiKey() {
   API_KEY = API_KEYS[(currentApiKeyIndex + 1) % API_KEYS.length];
 }
 
-let API_KEY = "3065a421504844f18f7091cafe9c42c7";
+let API_KEY = API_KEYS[1];
 
 function removeDuplicates(articles) {
     const seen = new Set();
