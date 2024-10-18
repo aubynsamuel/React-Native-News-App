@@ -12,7 +12,7 @@ import {
 import NewsCard from '../components/NewsCard';
 import {fetchCategoriesNews, searchNews} from '../services/newsApi';
 import {useTheme} from '../NewsAppContext';
-import getStyles from '../styles';
+import {getStyles, colors} from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PopUpMenu from '../components/PopUpMenu';
 import SkeletonLoader from '../components/SkeletonLoader';
@@ -171,6 +171,25 @@ const CategoriesScreen = ({navigation}) => {
             onEndReachedThreshold={0.3}
             refreshing={refreshing}
             onRefresh={onRefresh}
+            ListEmptyComponent={
+              <View
+                style={{
+                  // flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  top: 20,
+                  width: '100%',
+                  height: 700,
+                }}>
+                  <Text style={{
+                    color: darkMode ? colors.bgLightColor : colors.bgDarkColor,
+                    fontSize: 20,
+                    marginBottom: 20,
+                    textAlign: 'center',
+                    width: '80%',
+                  }}>No news articles were found for this category at this time.</Text>
+              </View>
+            }
             ListFooterComponent={loading && <ActivityIndicator />}
           />
         )}

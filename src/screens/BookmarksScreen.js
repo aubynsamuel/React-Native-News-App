@@ -1,22 +1,29 @@
-import {View, FlatList} from 'react-native';
+import {View, FlatList, Text} from 'react-native';
 import {React, useState} from 'react';
 import TopHeaderBar from '../components/HeaderBar';
-import { useTheme } from '../NewsAppContext';
+import {useTheme} from '../NewsAppContext';
 import BookmarksNewsCard from '../components/BookmarksNewsCard';
 import PopUpMenu from '../components/PopUpMenu';
-import { colors } from '../styles';
+import {colors} from '../styles';
 
 const Bookmarks = ({navigation}) => {
-    const [refreshing, setRefreshing] = useState(false);
-    const onRefresh = () => {
-        setRefreshing(true);
-        setTimeout(()=>setRefreshing(false), 300)
-        
-      };
-    const {darkMode, bookmarksList} = useTheme()
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => setRefreshing(false), 300);
+  };
+  const {darkMode, bookmarksList} = useTheme();
   return (
-    <View style={{backgroundColor: darkMode ? colors.bgDarkColor : colors.bgLightColor, flex: 1,}} >
-      <TopHeaderBar title={'Bookmarks'} backButtonShown={true} theme={darkMode}/>
+    <View
+      style={{
+        backgroundColor: darkMode ? colors.bgDarkColor : colors.bgLightColor,
+        flex: 1,
+      }}>
+      <TopHeaderBar
+        title={'Bookmarks'}
+        backButtonShown={true}
+        theme={darkMode}
+      />
       <FlatList
         showsVerticalScrollIndicator={false}
         data={bookmarksList}
@@ -24,16 +31,34 @@ const Bookmarks = ({navigation}) => {
         renderItem={({item}) => (
           <BookmarksNewsCard
             item={item}
-            onPress={() => navigation.navigate('BookmarksArticles', {url: item.url})}
-          >
-            <PopUpMenu item={item} remove={true}/>
+            onPress={() =>
+              navigation.navigate('BookmarksArticles', {url: item.url})
+            }>
+            <PopUpMenu item={item} remove={true} />
           </BookmarksNewsCard>
         )}
-        style={{marginVertical:5}}
+        style={{marginVertical: 5}}
         refreshing={refreshing}
         onRefresh={onRefresh}
-        
-        ListFooterComponent={<View style={{height:40}} />}
+        ListEmptyComponent={
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              height: 700,
+            }}>
+            <Text
+              style={{
+                color: darkMode ? colors.bgLightColor : colors.bgDarkColor,
+                fontSize: 20,
+              }}>
+              No bookmarks saved yet.
+            </Text>
+          </View>
+        }
+        ListFooterComponent={<View style={{height: 10}} />}
       />
     </View>
   );

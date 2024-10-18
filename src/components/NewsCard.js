@@ -26,7 +26,6 @@ const NewsCard = ({children, item, onPress}) => {
         )}
         <Image
           source={{ uri: item.urlToImage }}
-          // source={require('./looking_for_a_friend_4k_hd_inspirational.jpg')}
           style={styles.image}
           onLoad={() => setLoading(false)}
           onError={() => setLoading(false)}

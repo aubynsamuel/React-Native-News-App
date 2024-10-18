@@ -176,15 +176,15 @@ export const getStyles = (isDarkMode) => {
       alignItems: "center",
     },
 
-    // Custom News Car Component
+    // Custom News Card Component
     card: {
       backgroundColor: "transparent",
       overflow: "hidden",
-      marginBottom: 10,
+      marginBottom: 15,
     },
     image: {
-      width: "auto",
-      height: 210,
+      width: "100%",
+      height: 240,
     },
     content: {
       padding: 5,

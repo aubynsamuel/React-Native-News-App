@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {fetchNewsData} from '../services/newsApi';
 import NewsCard from '../components/NewsCard';
@@ -124,6 +125,44 @@ const HomeScreen = ({navigation}) => {
           refreshing={refreshing}
           onRefresh={onRefresh}
           ListFooterComponent={loading && <ActivityIndicator />}
+          ListEmptyComponent={
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                height: 700,
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  color: darkMode ? '#fff' : '#333',
+                }}>
+                No news available
+              </Text>
+              <Text
+                style={{
+                  fontSize: 15,
+                  marginTop: 10,
+                  color: darkMode ? '#fff9' : '#666',
+                }}>
+                Please try again later
+              </Text>
+
+              <TouchableOpacity
+                style={{
+                  backgroundColor: darkMode ? '#000' : '#fff',
+                  padding: 15,
+                  borderRadius: 5,
+                  marginTop: 20,
+                }}
+                onPress={onRefresh}>
+                <Text style={{color: darkMode ? '#fff' : '#000'}}>Retry</Text>
+              </TouchableOpacity>
+            </View>
+          }
         />
       )}
       {error && <Text style={styles.errorText}>{error}</Text>}
