@@ -184,7 +184,7 @@ export const getStyles = (isDarkMode) => {
     },
     image: {
       width: "100%",
-      height: 240,
+      height: 200,
     },
     content: {
       padding: 5,
