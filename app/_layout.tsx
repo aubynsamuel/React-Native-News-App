@@ -1,7 +1,11 @@
 import "react-native-reanimated";
 import React from "react";
 import { MenuProvider } from "react-native-popup-menu";
-import { useTheme, AppContextProvider } from "../NewsAppContext";
+import {
+  useTheme,
+  AppContextProvider,
+  AppContextType,
+} from "../NewsAppContext";
 import { StatusBar } from "expo-status-bar";
 import { getStyles, colors } from "../styles";
 import { Tabs } from "expo-router";
@@ -16,11 +20,11 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const { darkMode } = useTheme();
+  const { darkMode } = useTheme() as AppContextType;
   const styles = getStyles(darkMode);
 
-  const TabBarIcon = ({ name, color }) => {
-    return <MaterialIcons name={name} color={color} size={24} />;
+  const TabBarIcon = ({ name, color }: { name: string; color: string }) => {
+    return <MaterialIcons name={name as any} color={color} size={24} />;
   };
 
   return (
@@ -31,23 +35,24 @@ function RootLayoutNav() {
         style={darkMode ? "light" : "dark"}
       />
       <Tabs
+      initialRouteName="(HomeStack)"
         screenOptions={() => ({
           headerShown: false,
           tabBarActiveTintColor: darkMode ? colors.bgLightColor : colors.accent,
           tabBarInactiveTintColor: darkMode ? "#fff8" : "#666",
-          tabBarActiveBackgroundColor:"#fec0f4",
+          tabBarActiveBackgroundColor: "#fec0f4",
           tabBarShowLabel: true,
-          tabBarLabelStyle:{
-            color: darkMode? colors.bgDarkColor : colors.accent,
+          tabBarLabelStyle: {
+            color: darkMode ? colors.bgDarkColor : colors.accent,
           },
           tabBarStyle: {
-            position:"absolute",
-            bottom:10,
-            width:"85%",
-            elevation:3,
-            borderRadius:50,
+            position: "absolute",
+            bottom: 10,
+            width: "85%",
+            elevation: 3,
+            borderRadius: 50,
             height: 55,
-            marginHorizontal:"7%",
+            marginHorizontal: "7%",
           },
         })}
       >
@@ -55,7 +60,7 @@ function RootLayoutNav() {
           name="(HomeStack)"
           options={{
             title: "Home",
-            tabBarIcon: () => <TabBarIcon name="home" color={"black"} />
+            tabBarIcon: () => <TabBarIcon name="home" color={"purple"} />,
           }}
         />
 
@@ -63,7 +68,7 @@ function RootLayoutNav() {
           name="(CategoriesStack)"
           options={{
             title: "Categories",
-            tabBarIcon: () => <TabBarIcon name="category" color={"black"} />
+            tabBarIcon: () => <TabBarIcon name="category" color={"purple"} />,
           }}
         />
 
@@ -71,7 +76,7 @@ function RootLayoutNav() {
           name="(SettingsStackNavigator)"
           options={{
             title: "Settings",
-            tabBarIcon: () => <TabBarIcon name="settings" color={"black"} />
+            tabBarIcon: () => <TabBarIcon name="settings" color={"purple"} />,
           }}
         />
       </Tabs>

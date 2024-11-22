@@ -1,11 +1,12 @@
 import { View, FlatList, Text } from "react-native";
-import { React, useState } from "react";
+import React, { useState } from "react";
 // import TopHeaderBar from "../../components/HeaderBar";
-import { useTheme } from "../../NewsAppContext";
+import { useTheme , AppContextType} from "../../NewsAppContext";
 import BookmarksNewsCard from "../../components/BookmarksNewsCard";
 import PopUpMenu from "../../components/PopUpMenu";
 import { colors } from "../../styles";
 import { router } from "expo-router";
+import { NewsItem } from "../../components/BookmarksNewsCard";
 
 const Bookmarks = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -13,7 +14,7 @@ const Bookmarks = () => {
     setRefreshing(true);
     setTimeout(() => setRefreshing(false), 300);
   };
-  const { darkMode, bookmarksList } = useTheme();
+  const { darkMode, bookmarksList } = useTheme() as AppContextType;
   return (
     <View
       style={{
@@ -40,7 +41,7 @@ const Bookmarks = () => {
               })
             }
           >
-            <PopUpMenu item={item} remove={true} />
+            <PopUpMenu item={item} remove={true} add={false} />
           </BookmarksNewsCard>
         )}
         style={{ marginVertical: 5 }}

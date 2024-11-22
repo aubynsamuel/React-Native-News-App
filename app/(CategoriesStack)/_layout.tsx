@@ -1,9 +1,9 @@
 import React from "react";
 import { Stack } from "expo-router";
-import { useTheme } from "../../NewsAppContext";
+import { useTheme, AppContextType } from "../../NewsAppContext";
 
 const _layout = () => {
-  const { darkMode } = useTheme();
+  const { darkMode } = useTheme() as AppContextType;
   return (
     <Stack
       screenOptions={{
@@ -20,19 +20,14 @@ const _layout = () => {
       }}
     >
       <Stack.Screen
-        name="Settings"
+        name="CategoriesScreen"
         options={{
-          title: "Settings",
+          headerShown: false,
+          title: "Categories",
         }}
       />
       <Stack.Screen
-        name="Bookmarks"
-        options={{
-          title: "Bookmarks",
-        }}
-      />
-      <Stack.Screen
-        name="BookmarksArticles"
+        name="CategoriesArticle"
         options={{
           title: "Article",
         }}

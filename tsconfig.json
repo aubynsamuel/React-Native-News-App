@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "app/_layout.js"  ]
+, "app/index.tsx "services/newsApi.js"  ]
 }

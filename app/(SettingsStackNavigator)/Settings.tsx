@@ -8,13 +8,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useTheme} from '../../NewsAppContext';
+import {useTheme, AppContextType} from '../../NewsAppContext';
 import {getStyles, colors} from '../../styles';
 // import TopHeaderBar from '../../components/HeaderBar';
 import { router } from 'expo-router';
 
 const SettingsScreen = () => {
-  const {darkMode, toggleDarkMode, bookmarksList, storage} = useTheme();
+  const {darkMode, toggleDarkMode, bookmarksList, storage} = useTheme() as AppContextType;
   const styles = getStyles(darkMode);
   const [storageSize, setStorageSize] = useState(0);
   
@@ -26,7 +26,7 @@ const SettingsScreen = () => {
       const result = await AsyncStorage.multiGet(keysToInclude);
       let totalSize = 0;
       result.forEach(([key, value]) => {
-        totalSize += key.length + value.length;
+        totalSize += key.length + (value ? value.length : 0);
       });
       setStorageSize(totalSize);
     } catch (error) {
@@ -84,7 +84,12 @@ const SettingsScreen = () => {
 export default SettingsScreen;
 
 // Custom component for settings with a switch
-const SettingSwitch = ({label, value, onValueChange, styles}) => (
+const SettingSwitch = ({label, value, onValueChange, styles}:{
+  label: string;
+  value: boolean;
+  onValueChange: (value: boolean) => void;
+  styles: any;
+}) => (
   <View style={styles.settingsRow}>
     <Text style={styles.settingsText}>{label}</Text>
     <Switch
@@ -97,7 +102,12 @@ const SettingSwitch = ({label, value, onValueChange, styles}) => (
 );
 
 // Custom component for settings with a button
-const SettingButton = ({label, buttonText, onPress, styles}) => (
+const SettingButton = ({label, buttonText, onPress, styles}:{
+  label: string;
+  buttonText: string;
+  onPress: () => void;
+  styles: any;
+}) => (
   <View style={styles.settingsOption}>
     <Text style={styles.settingsText}>{label}</Text>
     <TouchableOpacity

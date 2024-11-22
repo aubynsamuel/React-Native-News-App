@@ -9,7 +9,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import { searchNews } from "../../services/newsApi";
-import { useTheme } from "../../NewsAppContext";
+import { useTheme , AppContextType} from "../../NewsAppContext";
 import { getStyles, colors } from "../../styles";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -18,15 +18,15 @@ const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const { darkMode } = useTheme();
+  const [error, setError] = useState("");
+  const { darkMode } = useTheme() as AppContextType;
   const styles = getStyles(darkMode);
 
   // Fetch search results
   const handleSearch = async () => {
     if (!searchQuery) return;
     setLoading(true);
-    setError(null);
+    setError("");
     try {
       const results = await searchNews(searchQuery, 1);
       setSearchResults(results);
@@ -38,7 +38,7 @@ const SearchScreen = () => {
   };
 
   // Render each news title
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }:{item:any}) => (
     <TouchableOpacity
       style={styles.titleContainer}
       onPress={() =>

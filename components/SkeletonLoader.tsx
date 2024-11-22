@@ -2,7 +2,7 @@ import React from 'react';
 import ContentLoader, { Rect } from 'react-content-loader/native';
 import { View } from 'react-native';
 
-const SkeletonLoader = ({ darkMode }) => {
+const SkeletonLoader = ({ darkMode }:{darkMode:Boolean}) => {
   const backgroundColor = darkMode ? "#333" : "#f3f3f3";
   const foregroundColor = darkMode ? "#555" : "#ecebeb";
 

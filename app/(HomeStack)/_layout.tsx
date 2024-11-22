@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, router, Stack } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useTheme } from "../../NewsAppContext";
+import { useTheme , AppContextType} from "../../NewsAppContext";
 
 const _layout = () => {
-  const { darkMode } = useTheme();
+  const { darkMode } = useTheme() as AppContextType;
 
   return (
     <Stack
@@ -27,7 +27,7 @@ const _layout = () => {
           title: "Top Headlines",
           headerTitleStyle: {
             fontSize: 22,
-            fontWeight: "690",
+            fontWeight: "semibold",
           },
           headerRight: () => {
             return (

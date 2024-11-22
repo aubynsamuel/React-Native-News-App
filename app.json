@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "worldbrief",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {

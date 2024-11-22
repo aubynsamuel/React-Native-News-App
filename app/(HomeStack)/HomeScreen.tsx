@@ -9,20 +9,21 @@ import {
 } from "react-native";
 import { fetchNewsData } from "../../services/newsApi";
 import NewsCard from "../../components/NewsCard";
-import { useTheme } from "../../NewsAppContext";
+import { useTheme, AppContextType } from "../../NewsAppContext";
 import getStyles from "../../styles";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import PopUpMenu from "../../components/PopUpMenu";
 import SkeletonLoader from "../../components/SkeletonLoader";
 import { router } from "expo-router";
+import { NewsItem } from "@/components/BookmarksNewsCard";
 
 const HomeScreen = () => {
-  const [dataList, setDataList] = useState([]);
+  const [dataList, setDataList] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(null);
-  const { darkMode, toggleStorage } = useTheme();
+  const [error, setError] = useState(String);
+  const { darkMode, toggleStorage } = useTheme() as AppContextType;
   const styles = getStyles(darkMode);
   const cacheDuration = 20 * 60 * 1000;
   const cacheKey = `cachedNewsData`;
@@ -42,7 +43,7 @@ const HomeScreen = () => {
       if (
         cachedData &&
         cachedTime &&
-        now - cachedTime < cacheDuration &&
+        now - parseInt(cachedTime) < cacheDuration &&
         page === 1
       ) {
         const articles = JSON.parse(cachedData);
@@ -53,7 +54,7 @@ const HomeScreen = () => {
         if (page === 1) {
           setDataList(articles);
           await AsyncStorage.setItem(cacheKey, JSON.stringify(articles));
-          await AsyncStorage.setItem(cacheTimeKey, now.toString());
+          await AsyncStorage.setItem(cacheTimeKey, JSON.stringify(now));
           toggleStorage();
 
           setTimeout(async () => {
@@ -65,8 +66,8 @@ const HomeScreen = () => {
           setDataList([...dataList, ...articles]);
         }
       }
-      setError(false);
-    } catch (error) {
+      setError("");
+    } catch (error: any) {
       setError(error.message);
     } finally {
       setLoading(false);
@@ -137,7 +138,7 @@ const HomeScreen = () => {
             </>
           }
           ListHeaderComponent={
-            error && <Text style={styles.errorText}>{error}</Text>
+            (error && <Text style={styles.errorText}>{error}</Text>) as any
           }
           ListEmptyComponent={
             <View

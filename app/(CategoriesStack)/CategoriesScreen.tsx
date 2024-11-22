@@ -11,12 +11,13 @@ import {
 } from "react-native";
 import NewsCard from "../../components/NewsCard";
 import { fetchCategoriesNews, searchNews } from "../../services/newsApi";
-import { useTheme } from "../../NewsAppContext";
+import { useTheme, AppContextType } from "../../NewsAppContext";
 import { getStyles, colors } from "../../styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PopUpMenu from "../../components/PopUpMenu";
 import SkeletonLoader from "../../components/SkeletonLoader";
 import { router } from "expo-router";
+import { NewsItem } from "../../components/BookmarksNewsCard";
 
 const CATEGORIES = [
   "local",
@@ -29,13 +30,13 @@ const CATEGORIES = [
 ];
 
 const CategoriesScreen = () => {
-  const [dataList, setDataList] = useState([]);
+  const [dataList, setDataList] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const [selectedCategory, setSelectedCategory] = useState('business');
-  const {darkMode, toggleStorage} = useTheme();
+  const {darkMode, toggleStorage} = useTheme() as AppContextType;
   const styles = getStyles(darkMode);
   const cacheDuration = 20 * 60 * 1000; // 20 minutes in milliseconds
 
@@ -58,7 +59,7 @@ const CategoriesScreen = () => {
       if (
         cachedData &&
         cachedTime &&
-        now - cachedTime < cacheDuration &&
+        now - parseInt(cachedTime) < cacheDuration &&
         page === 1
       ) {
         // If cache is valid and it's the first page, use cached data
@@ -88,8 +89,8 @@ const CategoriesScreen = () => {
           setDataList([...dataList, ...articles]);
         }
       }
-      setError(false);
-    } catch (error) {
+      setError("");
+    } catch (error : any) {
       setError(error.message);
     } finally {
       setLoading(false);
@@ -109,7 +110,7 @@ const CategoriesScreen = () => {
     }
   };
 
-  const handleCategoryPress = (category) => {
+  const handleCategoryPress = (category: React.SetStateAction<string>) => {
     setSelectedCategory(category);
     setPage(1);
     setDataList([]);
@@ -180,7 +181,7 @@ const CategoriesScreen = () => {
             refreshing={refreshing}
             onRefresh={onRefresh}
             ListHeaderComponent={
-              error && <Text style={styles.errorText}>{error}</Text>
+              (error && <Text style={styles.errorText}>{error}</Text>) as any
             }
             ListEmptyComponent={
               <View

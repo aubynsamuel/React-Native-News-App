@@ -1,10 +1,10 @@
 import React from "react";
 import { WebView } from "react-native-webview";
-// import TopHeaderBar from "../../components/HeaderBar";
 import { Text } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 
-const ArticleScreen = () => {
+
+const CategoriesArticle = () => {
   const { url } = useLocalSearchParams();
   return (
     <>
@@ -15,14 +15,14 @@ const ArticleScreen = () => {
       /> */}
 
       <WebView
-        source={{ uri: url }}
+        source={{ uri: url } as any}
         cacheEnabled={false}
         // cacheMode="LOAD_CACHE_ELSE_NETWORK"
         startInLoadingState={true}
-        renderError={() => <Text> Failed to load the article</Text>}
+        renderError={() => <Text>Failed to load the article</Text>}
       />
     </>
   );
 };
 
-export default ArticleScreen;
+export default CategoriesArticle;

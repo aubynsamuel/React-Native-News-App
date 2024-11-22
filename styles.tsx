@@ -6,7 +6,7 @@ export const colors={
   accent:"purple"
 }
 
-export const getStyles = (isDarkMode) => {
+export const getStyles = (isDarkMode: Boolean) => {
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -119,9 +119,6 @@ export const getStyles = (isDarkMode) => {
       color: "#ff5252",
       textAlign: "center",
       // marginTop: 70,
-    },
-    loadingIndicator: {
-      marginTop: 20,
     },
     noResultsText: {
       textAlign: "center",

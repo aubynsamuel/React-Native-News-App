@@ -1,11 +1,14 @@
 import React from "react";
 import { WebView } from "react-native-webview";
+import { useTheme , AppContextType} from "../../NewsAppContext";
+// import TopHeaderBar from "../../components/HeaderBar";
 import { Text } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 
 
-const CategoriesArticle = () => {
-  const { url } = useLocalSearchParams();
+const BookmarkArticle = () => {
+  const { darkMode } = useTheme() as AppContextType;
+  const { url } = useLocalSearchParams()
   return (
     <>
       {/* <TopHeaderBar
@@ -15,7 +18,7 @@ const CategoriesArticle = () => {
       /> */}
 
       <WebView
-        source={{ uri: url }}
+        source={{ uri: url } as any}
         cacheEnabled={false}
         // cacheMode="LOAD_CACHE_ELSE_NETWORK"
         startInLoadingState={true}
@@ -25,4 +28,4 @@ const CategoriesArticle = () => {
   );
 };
 
-export default CategoriesArticle;
+export default BookmarkArticle;

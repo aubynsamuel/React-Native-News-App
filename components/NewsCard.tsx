@@ -1,17 +1,33 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
   Image,
   TouchableOpacity,
   ActivityIndicator,
-} from 'react-native';
-import {getStyles, colors} from '../styles';
-import {useTheme} from '../NewsAppContext';
+  GestureResponderEvent,
+} from "react-native";
+import { getStyles, colors } from "../styles";
+import { useTheme, AppContextType } from "../NewsAppContext";
 
-const NewsCard = ({children, item, onPress}) => {
+interface NewsItem {
+  urlToImage: string;
+  title: string;
+  description: string;
+  url: string;
+}
+
+const NewsCard = ({
+  children,
+  item,
+  onPress,
+}: {
+  children?: React.ReactNode;
+  item: NewsItem;
+  onPress: (event: GestureResponderEvent) => void;
+}) => {
   const [loading, setLoading] = useState(true);
-  const {darkMode} = useTheme();
+  const { darkMode } = useTheme() as AppContextType;
   const styles = getStyles(darkMode);
 
   return (
@@ -33,15 +49,15 @@ const NewsCard = ({children, item, onPress}) => {
       </View>
 
       <View style={styles.content}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View style={{width: '90%'}}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View style={{ width: "90%" }}>
             <Text style={styles.title} numberOfLines={2}>
               {item.title}
             </Text>
           </View>
 
-        {/* Pop up Menus Component */}
-         {children}
+          {/* Pop up Menus Component */}
+          {children}
         </View>
 
         <Text style={styles.description} numberOfLines={1}>

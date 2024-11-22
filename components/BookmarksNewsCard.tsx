@@ -1,11 +1,32 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { useTheme } from "../NewsAppContext";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  GestureResponderEvent,
+} from "react-native";
+import { useTheme , AppContextType} from "../NewsAppContext";
 import { colors } from "../styles";
 
-const BookmarksNewsCard = ({ item, onPress, children }) => {
+export interface NewsItem {
+  urlToImage: string;
+  title: string;
+  description: string;
+  url: string;
+}
+const BookmarksNewsCard = ({
+  item,
+  onPress,
+  children,
+}: {
+  item: NewsItem;
+  onPress: (event: GestureResponderEvent) => void;
+  children: React.ReactNode;
+}) => {
   const [loading, setLoading] = useState(true);
-  const { darkMode } = useTheme();
+  const { darkMode } = useTheme() as AppContextType;
   const styles = getStyles(darkMode);
 
   return (
@@ -33,7 +54,7 @@ const BookmarksNewsCard = ({ item, onPress, children }) => {
   );
 };
 
-const getStyles = (darkMode) =>
+const getStyles = (darkMode: Boolean) =>
   StyleSheet.create({
     card: {
       marginBottom: 15,
@@ -58,7 +79,7 @@ const getStyles = (darkMode) =>
     description: {
       fontSize: 13,
       color: darkMode ? "#fff9" : "#666",
-      width:"85%"
+      width: "85%",
     },
     PopUpMenuAndDescription: {
       justifyContent: "space-evenly",

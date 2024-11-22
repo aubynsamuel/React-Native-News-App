@@ -1,11 +1,22 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NewsItem } from './components/BookmarksNewsCard';
 
-const AppContext = createContext();
+export interface AppContextType {
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+  bookmarksList: NewsItem[];
+  addToBookmarks: (item: NewsItem) => void;
+  removeFromBookmarks: (item: NewsItem) => void;
+  storage: boolean;
+  toggleStorage: () => void;
+}
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const useTheme = () => useContext(AppContext);
 
-export const AppContextProvider = ({children}) => {
+export const AppContextProvider = ({children}:{children:React.ReactNode}) => {
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => {
     setDarkMode(prevMode => !prevMode);
@@ -15,7 +26,7 @@ export const AppContextProvider = ({children}) => {
     setStorageState(storage => !storage);
   };
 
-  const [bookmarksList, setBookmarksList] = useState([]);
+  const [bookmarksList, setBookmarksList] = useState<NewsItem[]>([]);
 
   useEffect(() => {
     const loadBookmarks = async () => {
@@ -45,13 +56,13 @@ export const AppContextProvider = ({children}) => {
     saveBookmarks();
   }, [bookmarksList]);
 
-  const addToBookmarks = item => {
+  const addToBookmarks = (item : NewsItem) => {
     if (!bookmarksList.includes(item)) {
     setBookmarksList(prevList => [...prevList, item]);
     }
   };
 
-  const removeFromBookmarks = item => {
+  const removeFromBookmarks = (item: NewsItem) => {
     if (bookmarksList.includes(item)) {
       setBookmarksList(prevList =>
         prevList.filter(bookmark => bookmark !== item),
