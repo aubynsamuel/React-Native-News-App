@@ -34,4 +34,4 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
-apiKeys.js
+apiKeys.tsx
