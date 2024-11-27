@@ -22,7 +22,7 @@ const _layout = () => {
       }}
     >
       <Stack.Screen
-        name={"HomeScreen"}
+        name="index"
         options={{
           title: "Top Headlines",
           headerTitleStyle: {
