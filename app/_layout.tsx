@@ -23,8 +23,22 @@ function RootLayoutNav() {
   const { darkMode } = useTheme() as AppContextType;
   const styles = getStyles(darkMode);
 
-  const TabBarIcon = ({ name, color }: { name: string; color: string }) => {
-    return <MaterialIcons name={name as any} color={color} size={24} />;
+  const TabBarIcon = ({
+    focused,
+    name,
+    color,
+  }: {
+    focused: boolean;
+    name: string;
+    color?: string;
+  }) => {
+    return (
+      <MaterialIcons
+        name={name as any}
+        color={(color = focused ? colors.accent : "black")}
+        size={24}
+      />
+    );
   };
 
   return (
@@ -42,9 +56,6 @@ function RootLayoutNav() {
           tabBarInactiveTintColor: darkMode ? "#fff8" : "#666",
           tabBarActiveBackgroundColor: "#fec0f4",
           tabBarShowLabel: true,
-          tabBarLabelStyle: {
-            color: darkMode ? colors.bgDarkColor : colors.accent,
-          },
           tabBarStyle: {
             position: "absolute",
             bottom: 10,
@@ -54,13 +65,15 @@ function RootLayoutNav() {
             height: 55,
             marginHorizontal: "7%",
           },
-        })}
+        })} 
       >
         <Tabs.Screen
           name="(HomeStack)"
           options={{
             title: "Home",
-            tabBarIcon: () => <TabBarIcon name="home" color={"purple"} />,
+            tabBarIcon: ({ focused }) => (
+              <TabBarIcon focused={focused} name="home" />
+            ),
           }}
         />
 
@@ -68,7 +81,9 @@ function RootLayoutNav() {
           name="(CategoriesStack)"
           options={{
             title: "Categories",
-            tabBarIcon: () => <TabBarIcon name="category" color={"purple"} />,
+            tabBarIcon: ({ focused }) => (
+              <TabBarIcon focused={focused} name="category" />
+            ),
           }}
         />
 
@@ -76,7 +91,9 @@ function RootLayoutNav() {
           name="(SettingsStackNavigator)"
           options={{
             title: "Settings",
-            tabBarIcon: () => <TabBarIcon name="settings" color={"purple"} />,
+            tabBarIcon: ({ focused }) => (
+              <TabBarIcon focused={focused} name="settings" />
+            ),
           }}
         />
       </Tabs>
