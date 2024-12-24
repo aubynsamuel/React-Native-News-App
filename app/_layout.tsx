@@ -49,13 +49,14 @@ function RootLayoutNav() {
         style={darkMode ? "light" : "dark"}
       />
       <Tabs
-      initialRouteName="(HomeStack)"
+        initialRouteName="(HomeStack)"
         screenOptions={() => ({
           headerShown: false,
-          tabBarActiveTintColor: darkMode ? colors.bgLightColor : colors.accent,
-          tabBarInactiveTintColor: darkMode ? "#fff8" : "#666",
           tabBarActiveBackgroundColor: "#fec0f4",
           tabBarShowLabel: true,
+          tabBarLabelStyle: {
+            color: "black",
+          },
           tabBarStyle: {
             position: "absolute",
             bottom: 10,
@@ -64,8 +65,9 @@ function RootLayoutNav() {
             borderRadius: 50,
             height: 55,
             marginHorizontal: "7%",
+            backgroundColor: darkMode ? "lightgrey" : colors.bgLightColor,
           },
-        })} 
+        })}
       >
         <Tabs.Screen
           name="(HomeStack)"
