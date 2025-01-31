@@ -13,7 +13,7 @@ import NewsCard from "../../components/NewsCard";
 import { fetchCategoriesNews, searchNews } from "../../services/newsApi";
 import { useTheme, AppContextType } from "../../NewsAppContext";
 import { getStyles, colors } from "../../styles";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import PopUpMenu from "../../components/PopUpMenu";
 import SkeletonLoader from "../../components/SkeletonLoader";
 import { router } from "expo-router";
@@ -35,8 +35,8 @@ const CategoriesScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
   const [error, setError] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState('business');
-  const {darkMode, toggleStorage} = useTheme() as AppContextType;
+  const [selectedCategory, setSelectedCategory] = useState("business");
+  const { darkMode, toggleStorage } = useTheme() as AppContextType;
   const styles = getStyles(darkMode);
   const cacheDuration = 20 * 60 * 1000; // 20 minutes in milliseconds
 
@@ -90,7 +90,7 @@ const CategoriesScreen = () => {
         }
       }
       setError("");
-    } catch (error : any) {
+    } catch (error: any) {
       setError(error.message);
     } finally {
       setLoading(false);
@@ -122,7 +122,7 @@ const CategoriesScreen = () => {
         <ScrollView
           style={[
             styles.categoryContainer,
-            { paddingTop: Platform.OS === "android" ? 30 : 0 },
+            { paddingTop: Platform.OS === "android" ? 40 : 0 },
           ]}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
