@@ -12,6 +12,6 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "app/index.tsx",
-    "services/newsApi.js"
+    "services/fetchNews.ts"
   ]
 }

@@ -21,10 +21,12 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "icon": "/assets/images/icon.png",
       "package": "com.aubynsamuel04.world_brief"
     },
     "plugins": ["expo-router"],
     "experiments": {
+      "reactCompiler": true,
       "typedRoutes": true
     },
     "extra": {

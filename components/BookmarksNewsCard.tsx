@@ -2,38 +2,52 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   StyleSheet,
   GestureResponderEvent,
+  ActivityIndicator,
 } from "react-native";
-import { useTheme , AppContextType} from "../NewsAppContext";
-import { colors } from "../styles";
+import { useAppContext } from "../context/AppContext";
+import { colors } from "../constants/colors";
+import { Image } from "expo-image";
+import { NewsItem } from "@/types/types";
 
-export interface NewsItem {
-  urlToImage: string;
-  title: string;
-  description: string;
-  url: string;
+interface BookNewsCardInterface {
+  item: NewsItem;
+  onPress: (event: GestureResponderEvent) => void;
+  children: React.ReactNode;
 }
+
 const BookmarksNewsCard = ({
   item,
   onPress,
   children,
-}: {
-  item: NewsItem;
-  onPress: (event: GestureResponderEvent) => void;
-  children: React.ReactNode;
-}) => {
+}: BookNewsCardInterface) => {
   const [loading, setLoading] = useState(true);
-  const { darkMode } = useTheme() as AppContextType;
+  const { darkMode } = useAppContext();
   const styles = getStyles(darkMode);
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.card} activeOpacity={0.8}>
+      {loading && (
+        <View
+          style={[
+            {
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: darkMode ? "#121212" : "#f7f7f7",
+              height: 200,
+              zIndex: 1,
+            },
+            StyleSheet.absoluteFill,
+          ]}
+        >
+          <ActivityIndicator size="large" color={colors.accent} />
+        </View>
+      )}
+
       <Image
         source={{ uri: item.urlToImage }}
-        // source={require('./looking_for_a_friend_4k_hd_inspirational.jpg')}
         style={styles.image}
         onLoad={() => setLoading(false)}
         onError={() => setLoading(false)}
@@ -54,7 +68,7 @@ const BookmarksNewsCard = ({
   );
 };
 
-const getStyles = (darkMode: Boolean) =>
+const getStyles = (darkMode: boolean) =>
   StyleSheet.create({
     card: {
       marginBottom: 15,

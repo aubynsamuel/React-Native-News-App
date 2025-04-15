@@ -1,13 +1,9 @@
 import "react-native-reanimated";
 import React from "react";
 import { MenuProvider } from "react-native-popup-menu";
-import {
-  useTheme,
-  AppContextProvider,
-  AppContextType,
-} from "../NewsAppContext";
+import { AppContextProvider, useAppContext } from "../context/AppContext";
 import { StatusBar } from "expo-status-bar";
-import { getStyles, colors } from "../styles";
+import { colors } from "../constants/colors";
 import { Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -20,22 +16,19 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const { darkMode } = useTheme() as AppContextType;
-  const styles = getStyles(darkMode);
+  const { darkMode } = useAppContext();
 
   const TabBarIcon = ({
     focused,
     name,
-    color,
   }: {
     focused: boolean;
     name: string;
-    color?: string;
   }) => {
     return (
       <MaterialIcons
-        name={name as any}
-        color={(color = focused ? colors.accent : "black")}
+        name={name as keyof typeof MaterialIcons.glyphMap}
+        color={focused === true ? colors.accent : "black"}
         size={24}
       />
     );
@@ -45,11 +38,13 @@ function RootLayoutNav() {
     <MenuProvider>
       <StatusBar
         animated={true}
-        backgroundColor={darkMode ? colors.bgDarkColor : colors.bgLightColor}
+        backgroundColor={
+          darkMode ? colors.bgDarkColor : colors.bgLightSecondary
+        }
         style={darkMode ? "light" : "dark"}
       />
       <Tabs
-        initialRouteName="(HomeStack)"
+        initialRouteName="(home)"
         screenOptions={() => ({
           headerShown: false,
           tabBarActiveBackgroundColor: "#fec0f4",
@@ -70,7 +65,7 @@ function RootLayoutNav() {
         })}
       >
         <Tabs.Screen
-          name="(HomeStack)"
+          name="(home)"
           options={{
             title: "Home",
             tabBarIcon: ({ focused }) => (
@@ -80,7 +75,7 @@ function RootLayoutNav() {
         />
 
         <Tabs.Screen
-          name="(CategoriesStack)"
+          name="(categories)"
           options={{
             title: "Categories",
             tabBarIcon: ({ focused }) => (
@@ -90,7 +85,7 @@ function RootLayoutNav() {
         />
 
         <Tabs.Screen
-          name="(SettingsStackNavigator)"
+          name="(settings)"
           options={{
             title: "Settings",
             tabBarIcon: ({ focused }) => (

@@ -1,25 +1,22 @@
 import React from "react";
 import { Stack } from "expo-router";
-import { useTheme, AppContextType } from "../../NewsAppContext";
+import { useAppContext } from "../../context/AppContext";
+import { colors } from "@/constants/colors";
 import { View } from "react-native";
-import { colors } from "@/styles";
 
 const _layout = () => {
-  const { darkMode } = useTheme() as AppContextType;
+  const { darkMode } = useAppContext();
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: darkMode ? colors.bgDarkColor : colors.bgLightColor,
-      }}
-    >
+    <View style={{ backgroundColor: darkMode ? "black" : "white", flex: 1 }}>
       <Stack
         screenOptions={{
           headerShown: true,
           animation: "simple_push",
           navigationBarColor: darkMode ? "black" : "white",
           headerStyle: {
-            backgroundColor: darkMode ? "black" : "white",
+            backgroundColor: darkMode
+              ? colors.bgDarkColor
+              : colors.bgLightSecondary,
           },
           headerTitleStyle: {
             color: darkMode ? "white" : colors.accent,
@@ -28,14 +25,19 @@ const _layout = () => {
         }}
       >
         <Stack.Screen
-          name="CategoriesScreen"
+          name="SettingsScreen"
           options={{
-            headerShown: false,
-            title: "Categories",
+            title: "Settings",
           }}
         />
         <Stack.Screen
-          name="CategoriesArticle"
+          name="BookmarksScreen"
+          options={{
+            title: "Bookmarks",
+          }}
+        />
+        <Stack.Screen
+          name="BookmarksArticles"
           options={{
             title: "Article",
           }}

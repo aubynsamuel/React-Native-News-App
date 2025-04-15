@@ -1,4 +1,4 @@
-import { Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import React from "react";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import {
@@ -7,23 +7,25 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
-import { useTheme ,AppContextType} from "../NewsAppContext";
+import { useAppContext } from "../context/AppContext";
+import { NewsItem } from "@/types/types";
+import { colors } from "@/constants/colors";
 
 const PopUpMenu = ({
   item,
   add,
   remove,
 }: {
-  item: any;
-  add: Boolean;
-  remove: Boolean;
+  item: NewsItem;
+  add: boolean;
+  remove: boolean;
 }) => {
-  const { addToBookmarks, removeFromBookmarks, darkMode } = useTheme() as AppContextType;
+  const { addToBookmarks, removeFromBookmarks, darkMode } = useAppContext();
   const styles = getStyles(darkMode);
 
   return (
     <Menu>
-      <MenuTrigger style={{ marginRight: 5, top: 5 }}>
+      <MenuTrigger style={{ top: 5 }}>
         <Icon name="more-vert" color={darkMode ? "white" : "black"} size={25} />
       </MenuTrigger>
       <MenuOptions optionsContainerStyle={styles.container}>
@@ -43,10 +45,10 @@ const PopUpMenu = ({
   );
 };
 
-const getStyles = (darkMode: Boolean) =>
+const getStyles = (darkMode: boolean) =>
   StyleSheet.create({
     container: {
-      backgroundColor: darkMode ? "grey" : "lightgrey",
+      backgroundColor: darkMode ? colors.bgDarkColor : colors.bgLightColor,
       elevation: 6,
     },
     menuText: {

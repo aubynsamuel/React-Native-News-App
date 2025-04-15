@@ -4,9 +4,23 @@
 
 World Brief is a mobile news application built with React Native that provides users with curated news articles across various categories, featuring dark mode support and bookmarking functionality.
 
+## ScreenShots
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 45px;">
+    <img src="screenShots/home_2.jpg" width="200" alt="Home Screen">
+    <img src="screenShots/home_dark.jpg" width="200" alt="Home Screen DarkMode">
+    <img src="screenShots/categories.jpg" width="200" alt="Categories Screen">
+    <img src="screenShots/categories_dark_2.jpg" width="200" alt="Categories Screen DarkMode">
+    <img src="screenShots/bookmarks.jpg" width="200" alt="Bookmarks Screen">
+    <img src="screenShots/bookamrks_dark.jpg" width="200" alt="Bookmarks Screen DarkMode">
+    <img src="screenShots/search_screen.jpg" width="200" alt="Search Screen">
+    <img src="screenShots/settings_dark.jpg" width="200" alt="Settings Screen">
+</div>
+
 ## Features
 
 - Multiple News Categories
+
   - Local
   - Business
   - Technology
@@ -18,7 +32,6 @@ World Brief is a mobile news application built with React Native that provides u
 - Dark/Light Mode Toggle
 - Bookmark Articles
 - Search Functionality
-- Infinite Scroll News Loading
 - Caching Mechanism for Improved Performance
 
 ## Prerequisites
@@ -66,11 +79,12 @@ npx expo start
 
 - `/app`: Application routes with expo router
 - `/components`: Reusable UI components
+- `/constants`
+- `/context`: App state management
 - `/services`: API interaction logic
-- `/apiKeys.tsx`:News API keys
-- `/NewsAppContext.tsx`: App state management file
+- `/types`: Typescript type definitions
+- `/apiKeys.ts`:News API keys
 - `/package.json`
-- `/styles.tsx`: Styles file
 
 ## Contributing
 
