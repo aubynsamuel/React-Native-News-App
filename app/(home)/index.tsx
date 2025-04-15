@@ -25,6 +25,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
+import { openBrowser } from "@/utils/utils";
 
 const HomeScreen = () => {
   const [dataList, setDataList] = useState<NewsItem[]>([]);
@@ -160,15 +161,7 @@ const HomeScreen = () => {
             data={dataList}
             keyExtractor={(item) => item.url || item.title}
             renderItem={({ item }) => (
-              <NewsCard
-                item={item}
-                onPress={() =>
-                  router.navigate({
-                    pathname: "/(home)/Article",
-                    params: { url: item.url },
-                  })
-                }
-              >
+              <NewsCard item={item} onPress={() => openBrowser(item.url)}>
                 <PopUpMenu item={item} add={true} remove={true} />
               </NewsCard>
             )}

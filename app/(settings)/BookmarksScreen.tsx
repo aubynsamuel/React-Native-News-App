@@ -4,7 +4,7 @@ import { useAppContext } from "../../context/AppContext";
 import BookmarksNewsCard from "../../components/BookmarksNewsCard";
 import PopUpMenu from "../../components/PopUpMenu";
 import { colors } from "../../constants/colors";
-import { router } from "expo-router";
+import { openBrowser } from "@/utils/utils";
 
 const Bookmarks = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -27,15 +27,7 @@ const Bookmarks = () => {
         data={bookmarksList}
         keyExtractor={(item) => item.url || item.title}
         renderItem={({ item }) => (
-          <BookmarksNewsCard
-            item={item}
-            onPress={() =>
-              router.navigate({
-                pathname: "/(settings)/BookmarksArticles",
-                params: { url: item.url },
-              })
-            }
-          >
+          <BookmarksNewsCard item={item} onPress={() => openBrowser(item.url)}>
             <PopUpMenu item={item} remove={true} add={false} />
           </BookmarksNewsCard>
         )}

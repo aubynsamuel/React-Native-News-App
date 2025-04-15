@@ -36,12 +36,6 @@ const _layout = () => {
             title: "Bookmarks",
           }}
         />
-        <Stack.Screen
-          name="BookmarksArticles"
-          options={{
-            title: "Article",
-          }}
-        />
       </Stack>
     </View>
   );

@@ -29,12 +29,6 @@ const _layout = () => {
             title: "Categories",
           }}
         />
-        <Stack.Screen
-          name="CategoriesArticle"
-          options={{
-            title: "Article",
-          }}
-        />
       </Stack>
     </View>
   );

@@ -11,7 +11,7 @@ const _layout = () => {
     <View style={{ backgroundColor: darkMode ? "black" : "white", flex: 1 }}>
       <Stack
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
           animation: "simple_push",
           navigationBarColor: darkMode ? "black" : "white",
           headerStyle: {
@@ -27,20 +27,12 @@ const _layout = () => {
           name="index"
           options={{
             title: "Top Headlines",
-            headerShown: false,
           }}
         />
 
         <Stack.Screen
-          name="Article"
-          options={{
-            title: "Article",
-          }}
-        />
-        <Stack.Screen
           name="SearchScreen"
           options={{
-            headerShown: false,
             title: "Search",
           }}
         />

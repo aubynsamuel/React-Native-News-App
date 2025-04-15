@@ -2,7 +2,7 @@
   "expo": {
     "name": "World Brief",
     "slug": "world_brief",
-    "version": "2.5.0",
+    "version": "3.5.0",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "worldbrief",
@@ -21,7 +21,6 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "icon": "/assets/images/icon.png",
       "package": "com.aubynsamuel04.world_brief"
     },
     "plugins": ["expo-router"],

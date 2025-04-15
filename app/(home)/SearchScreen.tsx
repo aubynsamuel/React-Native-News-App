@@ -15,6 +15,7 @@ import { colors } from "../../constants/colors";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { NewsItem } from "@/types/types";
+import { openBrowser } from "@/utils/utils";
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,12 +43,7 @@ const SearchScreen = () => {
   const renderItem = ({ item }: { item: NewsItem }) => (
     <TouchableOpacity
       style={styles.titleContainer}
-      onPress={() =>
-        router.navigate({
-          pathname: "/(home)/Article",
-          params: { url: item.url },
-        })
-      }
+      onPress={() => openBrowser(item.url)}
       activeOpacity={0.6}
     >
       <Text style={styles.titleText} numberOfLines={2}>

@@ -21,8 +21,8 @@ import { colors } from "../../constants/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import PopUpMenu from "../../components/PopUpMenu";
 import SkeletonLoader from "../../components/SkeletonLoader";
-import { router } from "expo-router";
 import { NewsItem } from "@/types/types";
+import { openBrowser } from "@/utils/utils";
 
 export interface CategoryItem {
   id: string;
@@ -172,15 +172,7 @@ const CategoriesScreen = () => {
           transform: [{ scale: 1 }],
         }}
       >
-        <NewsCard
-          item={item}
-          onPress={() =>
-            router.navigate({
-              pathname: "/(categories)/CategoriesArticle",
-              params: { url: item.url },
-            })
-          }
-        >
+        <NewsCard item={item} onPress={() => openBrowser(item.url)}>
           <PopUpMenu item={item} add={true} remove={true} />
         </NewsCard>
       </Animated.View>

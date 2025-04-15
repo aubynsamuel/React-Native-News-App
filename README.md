@@ -4,7 +4,7 @@
 
 World Brief is a mobile news application built with React Native that provides users with curated news articles across various categories, featuring dark mode support and bookmarking functionality.
 
-## ScreenShots
+## Screenshots
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 45px;">
     <img src="screenShots/home_2.jpg" width="200" alt="Home Screen">
@@ -44,7 +44,7 @@ World Brief is a mobile news application built with React Native that provides u
 1. Clone the repository
 
 ```bash
-git clone https://github.com/aubynsamuel/World-Brief.git
+git clone https://github.com/aubynsamuel/world-brief.git
 cd world-brief
 ```
 
@@ -66,14 +66,6 @@ yarn install
 # Start the app
 npx expo start
 ```
-
-## Tech Stack
-
-- React Native
-- Expo Router
-- AsyncStorage
-- NewsAPI
-- MaterialIcons
 
 ## Project Structure
 
