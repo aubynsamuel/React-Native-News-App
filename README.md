@@ -7,14 +7,12 @@ World Brief is a mobile news application built with React Native that provides u
 ## Screenshots
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 45px;">
-    <img src="screenShots/home_2.jpg" width="200" alt="Home Screen">
-    <img src="screenShots/home_dark.jpg" width="200" alt="Home Screen DarkMode">
-    <img src="screenShots/categories.jpg" width="200" alt="Categories Screen">
-    <img src="screenShots/categories_dark_2.jpg" width="200" alt="Categories Screen DarkMode">
-    <img src="screenShots/bookmarks.jpg" width="200" alt="Bookmarks Screen">
-    <img src="screenShots/bookamrks_dark.jpg" width="200" alt="Bookmarks Screen DarkMode">
-    <img src="screenShots/search_screen.jpg" width="200" alt="Search Screen">
-    <img src="screenShots/settings_dark.jpg" width="200" alt="Settings Screen">
+    <img src="screenShots/home-portrait.png" width="200" alt="Bookmarks Screen">
+    <img src="screenShots/categories-portrait.png" width="200" alt="Categories Screen">
+    <img src="screenShots/search_screen-portrait.png" width="200" alt="Bookmarks Screen DarkMode">
+    <img src="screenShots/bookmarks-portrait.png" width="200" alt="Home Screen">
+    <img src="screenShots/home_dark-portrait.png" width="200" alt="Categories Screen DarkMode">
+    <img src="screenShots/categories_dark_2-portrait.png" width="200" alt="Home Screen DarkMode">
 </div>
 
 ## Features
