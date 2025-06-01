@@ -1,8 +1,12 @@
-# World Brief: React Native News Application
+<div align="center">
 
-## Overview
+ <img src="assets/images/icon.png" width="128" alt="Home Screen">
 
-World Brief is a mobile news application built with React Native that provides users with curated news articles across various categories, featuring dark mode support and bookmarking functionality.
+# World Brief
+
+World Brief is a mobile news app that provides users with curated news articles across various categories, featuring dark mode support and bookmarking functionality.
+
+</div>
 
 ## Screenshots
 
@@ -32,11 +36,6 @@ World Brief is a mobile news application built with React Native that provides u
 - Search Functionality
 - Caching Mechanism for Improved Performance
 
-## Prerequisites
-
-- Node.js (v18+)
-- Latest version of the expo go app
-
 ## Installation
 
 1. Clone the repository
@@ -56,7 +55,16 @@ yarn install
 
 3. Configure API Keys
 
-- Add your NewsAPI keys in `apiKeys.tsx`
+- Create `apiKeys.tsx` in the root directory add your NewsAPI keys
+
+```
+export const API_KEYS: string[] = [
+  "examplekey1",
+  "examplekey2",
+  "examplekey3",
+];
+
+```
 
 4. Run the application
 
@@ -64,17 +72,6 @@ yarn install
 # Start the app
 npx expo start
 ```
-
-## Project Structure
-
-- `/app`: Application routes with expo router
-- `/components`: Reusable UI components
-- `/constants`
-- `/context`: App state management
-- `/services`: API interaction logic
-- `/types`: Typescript type definitions
-- `/apiKeys.ts`:News API keys
-- `/package.json`
 
 ## Contributing
 
