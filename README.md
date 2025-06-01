@@ -6,7 +6,7 @@ World Brief is a mobile news application built with React Native that provides u
 
 ## Screenshots
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1px;">
+<div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1px;">
     <img src="screenShots/home-portrait.webp" width="300" alt="Home Screen">
     <img src="screenShots/categories-portrait.webp" width="300" alt="Categories Screen">
     <img src="screenShots/search_screen-portrait.webp" width="300" alt="Search Screen">
